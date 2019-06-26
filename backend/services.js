@@ -56,6 +56,7 @@ MongoClient.connect(mongourl, { useNewUrlParser: true }, (err, client) => {
   })
 })
 
+
 /** corses managing */
 app.delete('/delete_corse/:id', cors(), (req, res) => {
   let ID = ObjectID(req.params.id)
