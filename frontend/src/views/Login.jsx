@@ -12,7 +12,7 @@ class FormPage extends Component {
   render() { 
     return ( 
       <section className="bglogin">
-      <center><h1 className="logo col-lg-4 col-md-6 col-sm-12" > General Manager</h1></center>
+      <center><h3 className="logo"> General Manager</h3></center>
       <div className="login-wrap">
         <div className="login-html">
           <input id="tab-1" type="radio" name="tab" className="sign-in" defaultChecked /><label htmlFor="tab-1" className="tab">Authentication</label>
@@ -38,11 +38,9 @@ class FormPage extends Component {
               </div>
               <div className="hr" />
               <div className="foot-lnk">
-                Or continue with<br />
                 <Link to='/admin/dashboard'>
                   <GoogleLoginButton className='gmail-button' onClick={() => alert("Hello")} />
                 </Link>
-                
               </div>
             </div>
           </div>
