@@ -11,24 +11,22 @@ import firebaseConfig from './../variables/firebaseConfig';
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const firebaseAppAuth = firebaseApp.auth();
-const providers = {
-  googleProvider: new firebase.auth.GoogleAuthProvider(),
-};
+const providers = {googleProvider: new firebase.auth.GoogleAuthProvider()};
 
 class FormPage extends Component {
   constructor(props) {
-    const { user } = props;
     super(props);
-    this.state = { email: 'miled.bentaiba@gmail.com', password: 'azerty', isConnected: (user != null) }
+    const { user } = props;
+    this.state = { email: '', password: '', isConnected: (user != null), user: user }
   }
 
   componentDidMount() {
-    this.setState({ isConnected: (this.props.user != null) })
+    this.setState({ isConnected: (this.props.user != null), user:this.props.user })
   }
 
   componentWillReceiveProps(nextProps) {
     const { user } = nextProps;
-    this.setState({ isConnected: (user != null) })
+    this.setState({ isConnected: (user != null), user:this.props.user })
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -47,6 +45,8 @@ class FormPage extends Component {
       }
     })
   }
+
+  handleChange = (event) => { this.setState({ [event.target.name]: event.target.value }) }
 
   render() {
     const { signOut, signInWithGoogle } = this.props;
@@ -68,11 +68,13 @@ class FormPage extends Component {
               <div className="sign-in-htm">
                 <div className="group">
                   <label htmlFor="user" className="label">Username</label>
-                  <input required id="user" type="email" className="input" />
+                  <input required id="user" name='email' type="email" className="input" 
+                    onChange={this.handleChange}/>
                 </div>
                 <div className="group">
                   <label htmlFor="pass" className="label">Password</label>
-                  <input required id="pass" type="password" className="input" data-type="password" />
+                  <input required id="pass" name='password' type="password" className="input" 
+                    onChange={this.handleChange}/>
                 </div>
                 <div className="group">
                   <input id="check" type="checkbox" className="check" defaultChecked />
@@ -80,8 +82,7 @@ class FormPage extends Component {
                 </div>
                 <div className="group">
                   <Link to={this.state.isConnected ? '/admin/dashboard' : '/'}>
-                    <input onClick={this.signInSignUp}
-                      className="button" defaultValue="Sign in / Sign up" />
+                    <input onClick={this.signInSignUp} className="button" defaultValue="Sign in / Sign up" />
                   </Link>
                   <input onClick={signOut} className="button" defaultValue="Sign out" />
 
@@ -101,7 +102,4 @@ class FormPage extends Component {
   }
 }
 
-export default withFirebaseAuth({
-  providers,
-  firebaseAppAuth,
-})(FormPage);
+export default withFirebaseAuth({providers, firebaseAppAuth})(FormPage);
