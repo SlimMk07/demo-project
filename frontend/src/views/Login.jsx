@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import './login.css';
+import './../assets/css/login.css';
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { Link, Redirect } from 'react-router-dom'
 

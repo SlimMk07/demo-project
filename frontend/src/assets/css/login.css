@@ -165,7 +165,7 @@ text-align:center;
 }
 
 .bglogin {
-  background-image: url('bg1.png');
+  background-image: url('./../img/bg1.png');
   background-repeat: no-repeat ;
   width: 100%;
   height: 1080px;
