@@ -17,16 +17,16 @@ class FormPage extends Component {
   constructor(props) {
     super(props);
     const { user } = props;
-    this.state = { email: '', password: '', isConnected: (user != null), user: user }
+    this.state = { email: '', password: '', isConnected: (user != null) }
   }
 
   componentDidMount() {
-    this.setState({ isConnected: (this.props.user != null), user:this.props.user })
+    this.setState({ isConnected: (this.props.user != null) })
   }
 
   componentWillReceiveProps(nextProps) {
     const { user } = nextProps;
-    this.setState({ isConnected: (user != null), user:this.props.user })
+    this.setState({ isConnected: (user != null)})
   }
 
   shouldComponentUpdate(nextProps, nextState) {
