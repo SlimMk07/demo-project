@@ -1,20 +1,12 @@
 import React from "react";
 import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Container,
-  InputGroup,
-  InputGroupText,
-  InputGroupAddon,
-  Input
+  Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
+  Container, InputGroup, InputGroupText, InputGroupAddon, Input
 } from "reactstrap";
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+
+
 
 import routes from "routes.js";
 
@@ -29,6 +21,10 @@ class Header extends React.Component {
     this.toggle = this.toggle.bind(this);
     this.dropdownToggle = this.dropdownToggle.bind(this);
     this.sidebarToggle = React.createRef();
+  }
+  disconnect=()=>{
+    this.props.user.connection.signOut()
+    this.props.disconnect()
   }
   toggle() {
     if (this.state.isOpen) {
@@ -102,7 +98,7 @@ class Header extends React.Component {
           this.props.location.pathname.indexOf("full-screen-maps") !== -1
             ? "navbar-absolute fixed-top"
             : "navbar-absolute fixed-top " +
-              (this.state.color === "transparent" ? "navbar-transparent " : "")
+            (this.state.color === "transparent" ? "navbar-transparent " : "")
         }
       >
         <Container fluid>
@@ -155,7 +151,9 @@ class Header extends React.Component {
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem tag="a">Help</DropdownItem>
-                  <DropdownItem tag="a">Logout</DropdownItem>
+                  <Link to={this.props.user.isConnected ? '/admin/dashboard' : '/'} onClick={this.disconnect}>
+                    Logout
+                  </Link>
                 </DropdownMenu>
               </Dropdown>
             </Nav>
@@ -166,4 +164,21 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+  console.log('got state', state)
+  return {
+    user: state.user
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    disconnect: () => {
+      dispatch({
+        type: 'DISCONNECT',
+      })
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

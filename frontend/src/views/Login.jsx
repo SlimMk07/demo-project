@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import './../assets/css/login.css';
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { Link, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+
 
 import withFirebaseAuth from 'react-with-firebase-auth'
 import * as firebase from 'firebase/app';
@@ -11,7 +13,7 @@ import firebaseConfig from './../variables/firebaseConfig';
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const firebaseAppAuth = firebaseApp.auth();
-const providers = {googleProvider: new firebase.auth.GoogleAuthProvider()};
+const providers = { googleProvider: new firebase.auth.GoogleAuthProvider() };
 
 class FormPage extends Component {
   constructor(props) {
@@ -26,11 +28,16 @@ class FormPage extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { user } = nextProps;
-    this.setState({ isConnected: (user != null)})
+    this.setState({ isConnected: (user != null) })
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    if(nextProps.user != null) { 
+      const {user, signOut} = nextProps
+      this.props.login({user, signOut})
+    }
     return (this.state.isConnected !== nextState.isConnected)
+    
   }
 
   signInSignUp = () => {
@@ -40,7 +47,7 @@ class FormPage extends Component {
       if (!value) {
         const create = signInWithEmailAndPassword(this.state.email, this.state.password)
         create.then((value) => {
-          if(!value) alert ('wrong email or password')
+          if (!value) alert('wrong email or password')
         })
       }
     })
@@ -49,11 +56,11 @@ class FormPage extends Component {
   handleChange = (event) => { this.setState({ [event.target.name]: event.target.value }) }
 
   render() {
-    const { signOut, signInWithGoogle } = this.props;
+    const { signInWithGoogle } = this.props;
 
     console.log(this.props, this.state.isConnected)
-    {/*if(this.state.isConnected) 
-    return <Redirect to="/admin/dashboard"></Redirect>*/}
+    if (this.state.isConnected)
+      return <Redirect to="/admin/dashboard"></Redirect>
 
     return (
       <section className="bglogin">
@@ -68,13 +75,13 @@ class FormPage extends Component {
               <div className="sign-in-htm">
                 <div className="group">
                   <label htmlFor="user" className="label">Username</label>
-                  <input required id="user" name='email' type="email" className="input" 
-                    onChange={this.handleChange}/>
+                  <input required id="user" name='email' type="email" className="input"
+                    onChange={this.handleChange} />
                 </div>
                 <div className="group">
                   <label htmlFor="pass" className="label">Password</label>
-                  <input required id="pass" name='password' type="password" className="input" 
-                    onChange={this.handleChange}/>
+                  <input required id="pass" name='password' type="password" className="input"
+                    onChange={this.handleChange} />
                 </div>
                 <div className="group">
                   <input id="check" type="checkbox" className="check" defaultChecked />
@@ -82,9 +89,8 @@ class FormPage extends Component {
                 </div>
                 <div className="group">
                   <Link to={this.state.isConnected ? '/admin/dashboard' : '/'}>
-                    <input onClick={this.signInSignUp} className="button" defaultValue="Sign in / Sign up" />
+                    <input type="button" onClick={this.signInSignUp} className="button" defaultValue="Sign in / Sign up" />
                   </Link>
-                  <input onClick={signOut} className="button" defaultValue="Sign out" />
 
                 </div>
                 <div className="hr" />
@@ -102,4 +108,15 @@ class FormPage extends Component {
   }
 }
 
-export default withFirebaseAuth({providers, firebaseAppAuth})(FormPage);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: connection => {
+      dispatch({
+        type: 'CONNECT',
+        connection
+      })
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(withFirebaseAuth({ providers, firebaseAppAuth })(FormPage))

@@ -6,11 +6,15 @@ import {Card, CardHeader, CardBody, CardFooter, CardTitle, Row, Col} from "react
 // core components
 import {dashboard24HoursPerformanceChart, dashboardEmailStatisticsChart, dashboardNASDAQChart} from "variables/charts.jsx";
 
+
+
 class Dashboard extends React.Component {
+  datasetKeyProvider(){ return Math.random()*10000; } 
+
   render() {
     return (
       <>
-        <div className="content">
+        <div className="content"> 
           <Row>
             <Col lg="3" md="6" sm="6">
               <Card className="card-stats">
@@ -126,6 +130,7 @@ class Dashboard extends React.Component {
                 </CardHeader>
                 <CardBody>
                   <Line
+                    datasetKeyProvider={this.datasetKeyProvider}
                     data={dashboard24HoursPerformanceChart.data}
                     options={dashboard24HoursPerformanceChart.options}
                     width={400}
@@ -200,5 +205,6 @@ class Dashboard extends React.Component {
     );
   }
 }
+
 
 export default Dashboard;
