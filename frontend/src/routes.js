@@ -3,6 +3,7 @@ import Icons from "views/Icons.jsx";
 import TableList from "views/Tables.jsx";
 import UserPage from "views/User.jsx";
 import Notification from "views/Notifications.jsx"
+import Teacher from "views/teacher"
 
 var routes = [
   {
@@ -29,7 +30,7 @@ var routes = [
   {
     path: "/addprofs",
     name: "Add Professor",
-    component: UserPage,
+    component: Teacher,
     layout: "/admin"
   },
   {
@@ -59,5 +60,6 @@ var routes = [
     component: TableList,
     layout: "/admin"
   }
+
 ];
 export default routes;

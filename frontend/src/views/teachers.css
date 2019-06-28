@@ -1,0 +1,23 @@
+.navbar-absolute {
+    position: absolute;
+    margin-top: 0%;
+}
+.container1{
+    margin-top: 3%;
+    margin-left: 8%;
+    margin-bottom: 3%
+}
+.form-group{
+    height: 4rem;
+}
+.form-control{
+    height: 3rem;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #51cbce !important;
+}
+.nav-pills .nav-link{
+    margin-top: 2rem;
+
+}
