@@ -64,29 +64,15 @@ class Notifications extends React.Component {
       <>
         <div className="content">
           <NotificationAlert ref={this.notificationAlert} />
-          <Row>
+         <Row>
             <Col md="12">
-              <Card>
-                <CardHeader>
-                  <CardTitle tag="h5">Notifications</CardTitle>
+                <Card>
+               <CardHeader>
                   <p className="card-category">
-                    Handcrafted by our colleague{" "}
-                    <a
-                      target="_blank"
-                      href="https://www.instagram.com/manu.nazare/"
-                    >
-                      Nazare Emanuel-Ioan (Manu)
-                    </a>
-                    . Please checkout the{" "}
-                    <a
-                      href="https://github.com/creativetimofficial/react-notification-alert"
-                      target="_blank"
-                    >
-                      full documentation.
-                    </a>
+                    Handcrafted by our colleague
                   </p>
                 </CardHeader>
-                <CardBody>
+                {/* <CardBody>
                   <Row>
                     <Col md="6">
                       <Card className="card-plain">
@@ -262,9 +248,9 @@ class Notifications extends React.Component {
                       </Col>
                     </Row>
                   </div>
-                </CardBody>
+                </CardBody>*/}
               </Card>
-            </Col>
+            </Col> 
           </Row>
         </div>
       </>

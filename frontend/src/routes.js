@@ -1,5 +1,5 @@
 import Dashboard from "views/Dashboard.jsx";
-import Icons from "views/Icons.jsx";
+import Calendar from "views/Calendar.jsx";
 import TableList from "views/Tables.jsx";
 import UserPage from "views/User.jsx";
 import Notification from "views/Notifications.jsx"
@@ -14,10 +14,10 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/events",
-    name: "Events",
+    path: "/calendar",
+    name: "Calendar",
     icon: "nc-icon nc-diamond",
-    component: Icons,
+    component: Calendar,
     layout: "/admin"
   },
   {
@@ -50,6 +50,12 @@ var routes = [
     path: "/courses",
     name: "Courses",
     icon: "nc-icon nc-bulb-63",
+    component: TableList,
+    layout: "/admin"
+  },
+  {
+    path: "/addcourses",
+    name: "Add Courses",
     component: TableList,
     layout: "/admin"
   },

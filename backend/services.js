@@ -57,6 +57,49 @@ MongoClient.connect(mongourl, { useNewUrlParser: true }, (err, client) => {
 })
 
 
+/** students managing */
+app.delete('/delete_student/:id', cors(), (req, res) => {
+  let ID = ObjectID(req.params.id)
+  db.collection('student').findOneAndDelete({ _id: ID }, (err, data) => {
+    if (err) res.send(err)
+    else res.send(data)
+  })
+})
+
+app.post('/add_student', (req, res) => {
+  console.log(req.body)
+  let new_product = req.body
+  db.collection('student').insertOne(new_product, (err, data) => {
+    if (err) res.send(err)
+    else res.send(data)
+  })
+})
+
+app.get('/student/', cors(), (req, res) => {
+  db.collection('student').find().toArray((err, data) => {
+    if (err) res.send("error")
+    else res.send(data)
+  })
+})
+
+app.get('/students/:id', cors(), (req, res) => {
+  let ID = ObjectID(req.params.id)
+  db.collection('student').findOne({ _id: ID }, (err, data) => {
+    if (err) res.send("error")
+    else res.send(data)
+  })
+})
+
+app.put('/update_student/:id', bodyParser.json(), (req, res) => {
+  let ID = ObjectID(req.params.id)
+  let modifiedContact = req.body
+  db.collection('prof').findOneAndUpdate({ _id: ID }, { $set: { ...modifiedContact } }, (err, data) => {
+    if (err) res.send("error")
+    else res.send(data)
+  })
+})
+
+
 /** corses managing */
 app.delete('/delete_corse/:id', cors(), (req, res) => {
   let ID = ObjectID(req.params.id)

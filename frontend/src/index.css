@@ -12,3 +12,7 @@ code {
     monospace;
 }
 
+.btn-info {
+  background-color: #34b5b8 !important;
+  color: #FFFFFF;
+}

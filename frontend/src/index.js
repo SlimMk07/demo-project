@@ -10,19 +10,26 @@ import "assets/demo/demo.css";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 
 import AdminLayout from "layouts/Admin.jsx";
+import {Provider} from 'react-redux';
+import {createStore } from 'redux'
 
 import './index.css';
+import reducer from './reducers'
 
 
 const hist = createBrowserHistory();
+const store=createStore(reducer)
+
 
 ReactDOM.render(
-  <Router history={hist}>
-    <Switch>
-      <Route exact path="/" component={Login} />
-      <Route path="/admin" render={props => <AdminLayout {...props} />} />
-      <Redirect to="/admin/dashboard" />
-    </Switch>
-  </Router>,
+  <Provider store={store}>
+    <Router history={hist}>
+      <Switch>
+        <Route exact path="/" component={Login} />
+        <Route path="/admin" render={props => <AdminLayout {...props} />} />
+        <Redirect to="/admin/dashboard" />
+      </Switch>
+    </Router>
+  </Provider>,
   document.getElementById("root")
 );
