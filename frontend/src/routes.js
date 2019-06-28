@@ -53,6 +53,12 @@ var routes = [
     layout: "/admin"
   },
   {
+    path: "/addcourses",
+    name: "Add Courses",
+    component: TableList,
+    layout: "/admin"
+  },
+  {
     path: "/help",
     name: "Help",
     icon: "nc-icon nc-alert-circle-i",
