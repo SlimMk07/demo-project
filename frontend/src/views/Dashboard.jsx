@@ -9,7 +9,7 @@ import {dashboard24HoursPerformanceChart, dashboardEmailStatisticsChart, dashboa
 
 
 class Dashboard extends React.Component {
-  datasetKeyProvider(){ return Math.random()*10000; } 
+  datasetKeyProvider(){ return Math.random(); } 
 
   render() {
     return (
@@ -130,7 +130,7 @@ class Dashboard extends React.Component {
                 </CardHeader>
                 <CardBody>
                   <Line
-                    datasetKeyProvider={this.datasetKeyProvider}
+                    datasetKeyProvider={()=>this.datasetKeyProvider}
                     data={dashboard24HoursPerformanceChart.data}
                     options={dashboard24HoursPerformanceChart.options}
                     width={400}
@@ -181,6 +181,7 @@ class Dashboard extends React.Component {
                 </CardHeader>
                 <CardBody>
                   <Line
+                    datasetKeyProvider={()=>this.datasetKeyProvider}
                     data={dashboardNASDAQChart.data}
                     options={dashboardNASDAQChart.options}
                     width={400}

@@ -48,9 +48,6 @@ class ImageUpload extends Component {
   
         React.createElement("div", { className: "imgPreview" },
         $imagePreview)));
-  
-  
-  
     }}
   
   

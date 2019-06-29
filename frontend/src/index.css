@@ -16,3 +16,32 @@ code {
   background-color: #34b5b8 !important;
   color: #FFFFFF;
 }
+
+.logout {
+  font-size: 14px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  color: #66615B;
+  padding: 10px 45px 10px 15px;
+  clear: both;
+  white-space: nowrap;
+  width: 100%;
+  display: block;
+  font-weight: 400;
+  background-color: transparent;
+  border: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+  list-style: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  font: 600 16px/18px 'Open Sans',sans-serif;
+}
+.logout:hover{
+  color: white;
+  background-color: #66615B;
+}
+.logout:focus{
+  outline: none;
+}
