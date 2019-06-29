@@ -2,7 +2,7 @@ import moment from 'moment';
 
 const addOneClass=(objectC, duration)=>{
   return {
-    groupId: Math.random * 1000000,
+    groupId: Math.random() * 1000000,
     start: moment(new Date(objectC.start)).format('YYYY-MM-DDTHH:mm'),
     end: moment((new Date(objectC.start))
       .setMinutes(new Date(objectC.start).getMinutes() + duration))
@@ -24,12 +24,13 @@ const f = (objectC) => {
     case '7': {
       let x = moment(new Date(objectC.start)).format('YYYY-MM-DDTHH:mm')
       let events = []
-      const groupId = Math.random
+      const groupId = Math.random()
       while (x <= objectC.end) {
         let y = moment((new Date(objectC.start))
           .setMinutes(new Date(objectC.start).getMinutes() + duration))
           .format('YYYY-MM-DDTHH:mm')
         events.push({
+          id: Math.random(),
           groupId,
           start: x,
           end: y,

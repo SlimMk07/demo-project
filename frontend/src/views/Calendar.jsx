@@ -29,17 +29,17 @@ export default class CalendarFull extends React.Component {
       repeat:'7',
 
       events:[
-        // { id: 99, title: 'event 1', start: '2019-05-01', end: '2019-05-10', color:'red', url: 'http://google.com/' },
-        // { title: 'event 2', date: '2019-05-09', color: 'blue' },
-        // { title: 'jasser',  date: '2019-06-29', color:'yellow' },
-        // { title: 'All Day Event', start: '2019-05-09'},
-        // { title: 'Long Event', start: '2019-05-09', end: '2019-05-10' },
-        // { id: 999, title: 'Repeating Event', start: '2019-05-09T16:00:00'},
-        // { id: 999, title: 'Repeating Event', start: '2019-05-16T16:00:00'},
-        // { title: 'Conference', start: '2019-05-11', end: '2019-05-13' },
-        // { title: 'Meeting', groupId: 5, start: '2019-05-12T10:30:00', end: '2019-05-12T12:30:00' },
-        // { title: 'Birthday Party', groupId: 5, start: '2019-05-13T07:00:00' },
-        // { title: 'Click for Google', url: 'http://google.com/', start: '2019-05-28' }
+        { id: 99, title: 'event 1', start: '2019-05-01', end: '2019-05-10', color:'red', url: 'http://google.com/' },
+        { title: 'event 2', date: '2019-05-09', color: 'blue' },
+        { title: 'jasser',  date: '2019-06-29', color:'yellow' },
+        { title: 'All Day Event', start: '2019-05-09'},
+        { title: 'Long Event', start: '2019-05-09', end: '2019-05-10' },
+        { id: 999, title: 'Repeating Event', start: '2019-05-09T16:00:00'},
+        { id: 999, title: 'Repeating Event', start: '2019-05-16T16:00:00'},
+        { title: 'Conference', start: '2019-05-11', end: '2019-05-13' },
+        { title: 'Meeting', groupId: 5, start: '2019-05-12T10:30:00', end: '2019-05-12T12:30:00' },
+        { title: 'Birthday Party', groupId: 5, start: '2019-05-13T07:00:00' },
+        { title: 'Click for Google', url: 'http://google.com/', start: '2019-05-28' }
       ]
     };
   }
@@ -85,12 +85,19 @@ export default class CalendarFull extends React.Component {
                   this.setState({add: true, start: moment(info.date).format('YYYY-MM-DDTHH:mm'),
                     end: moment(info.date).format('YYYY-MM-DDTHH:mm')})
                 }}
-                eventPositioned={(info)=>{
-                  console.log('eventPositioned', info)
+                eventPositioned={({event, isStart, isEnd})=>{
+                  if (isStart && isEnd){
+                    console.log('eventPositioned', event)
+                  }
                 }}
-                eventClick={(calEvent, jsEvent, view)=>{
-                  alert('eventClick', calEvent, jsEvent, view)
-                  console.log('eventClick', calEvent, jsEvent, view)
+                eventResize={({event})=>{
+                  console.log('eventResize', event)
+                }}
+                eventClick={({el, event, jsEvent, view})=>{
+                  console.log('eventClick1', '\nend:-'+event.end, '\ngroupid-'+event.groupId, '\nid-'+event.id, 
+                  '\nstart-'+event.start, 
+                  '\ntextcolor-'+event.textColor, '\ncolor-'+event.color, '\ntitle-'+event.title, '\nurl-'+event.url,
+                  '\nbgcolor-'+event.backgroundColor)
                 }}
                 editable='true'/>
               </CardHeader>
