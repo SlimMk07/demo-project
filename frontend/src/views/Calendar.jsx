@@ -52,16 +52,14 @@ export default class CalendarFull extends React.Component {
 
   }
   handleForm=(e)=>{
-    this.setState({[e.target.name]: e.target.value}, 
-      ()=>console.log('state', this.state))
+    this.setState({[e.target.name]: e.target.value})
   }
   toggle=(event)=> {
-    console.log('toggle', event)
     const name = event.target.name
     const state= !(this.state[name] === true)
     this.setState(prevState => {
       return ({[name]: state})
-    }, ()=>console.log('state evts', this.state.events));
+    });
   }
   render() {
     return (

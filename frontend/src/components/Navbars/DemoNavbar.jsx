@@ -169,7 +169,6 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('got state', state)
   return {
     user: state.user
   }
