@@ -1,67 +1,61 @@
 import dayGridPlugin from '@fullcalendar/daygrid';
 import listPlugin from '@fullcalendar/list'
-import bootstrapPlugin from '@fullcalendar/bootstrap';
-
-
+import bootstrapPlugin from '@fullcalendar/bootstrap'
 import React from 'react'
 import FullCalendar from '@fullcalendar/react'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction';
-
+import moment from 'moment';
 import '@fullcalendar/core/main.css';
 import '@fullcalendar/daygrid/main.css';
-
 import 'fullcalendar-reactwrapper/dist/css/fullcalendar.min.css'
-import moment from 'moment';
-
-
 import {Card, CardHeader, Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { Form, FormGroup, Label, Input } from 'reactstrap';
-
 
 export default class CalendarFull extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {add: false, update: false,
-      class:'class',
-      course:"Science",
-      professor:'Titi',
-      start:moment(new Date()).format('YYYY-MM-DDTHH:mm'),
-      color: '#ff4444',
-      textColor: '#ffebee',
-      repeat:'7'
+    this.state = {
+      add: false, update: false,
+      addClass:{
+        class:'class',
+        course:"Science",
+        professor:'Titi',
+        start:moment(new Date()).format('YYYY-MM-DDTHH:mm'),
+        color: '#ff4444',
+        textColor: '#ffebee',
+        repeat:'7'},
+      events:[
+        { id: 99, title: 'event 1', start: '2019-05-01', end: '2019-05-10', color:'red', url: 'http://google.com/' },
+        { title: 'event 2', date: '2019-05-09', color: 'blue' },
+        { title: 'jasser',  date: '2019-06-29', color:'yellow' },
+        { title: 'All Day Event', start: '2019-05-09'},
+        { title: 'Long Event', start: '2019-05-09', end: '2019-05-10' },
+        { id: 999, title: 'Repeating Event', start: '2019-05-09T16:00:00', ondblclick: ()=>{
+              alert('dblclick')
+            }},
+        { id: 999, title: 'Repeating Event', start: '2019-05-16T16:00:00', ondblclick: ()=>{
+              alert('dblclick') }
+        },
+        { title: 'Conference', start: '2019-05-11', end: '2019-05-13' },
+        { title: 'Meeting', groupId: 5, start: '2019-05-12T10:30:00', end: '2019-05-12T12:30:00' },
+        { title: 'Birthday Party', groupId: 5, start: '2019-05-13T07:00:00' },
+        { title: 'Click for Google', url: 'http://google.com/', start: '2019-05-28' }
+      ]
     };
   }
   handleForm=(e)=>{
-    console.log({[e.target.name]: e.target.value})
-    this.setState({[e.target.name]: e.target.value}, ()=>console.log('state', this.state))
+    this.setState({addClass:{...this.state.addClass,[e.target.name]: e.target.value}}, 
+      ()=>console.log('state', this.state))
   }
   toggle=(event)=> {
     const name = event.target.name
     const state= !(this.state[name] === true)
-
     this.setState(prevState => {
       return ({[name]: state})
     });
   }
-  events = [
-    { id: 99, title: 'event 1', start: '2019-05-01', end: '2019-05-10', color:'red', url: 'http://google.com/' },
-    { title: 'event 2', date: '2019-05-09', color: 'blue' },
-    { title: 'jasser',  date: '2019-06-29', color:'yellow' },
-    { title: 'All Day Event', start: '2019-05-09'},
-    { title: 'Long Event', start: '2019-05-09', end: '2019-05-10' },
-    { id: 999, title: 'Repeating Event', start: '2019-05-09T16:00:00', ondblclick: ()=>{
-          alert('dblclick')
-        }},
-    { id: 999, title: 'Repeating Event', start: '2019-05-16T16:00:00', ondblclick: ()=>{
-          alert('dblclick') }
-    },
-    { title: 'Conference', start: '2019-05-11', end: '2019-05-13' },
-    { title: 'Meeting', groupId: 5, start: '2019-05-12T10:30:00', end: '2019-05-12T12:30:00' },
-    { title: 'Birthday Party', groupId: 5, start: '2019-05-13T07:00:00' },
-    { title: 'Click for Google', url: 'http://google.com/', start: '2019-05-28' }
-  ]
-
+  
   render() {
     return (
       <>
@@ -79,7 +73,7 @@ export default class CalendarFull extends React.Component {
                 defaultView="dayGridMonth" 
                 plugins={[ dayGridPlugin, timeGridPlugin, listPlugin, bootstrapPlugin, interactionPlugin]} 
                 weekends={false}
-                events={this.events}
+                events={this.state.events}
                 themeSystem='bootstrap'
                 dateClick={(info) =>{
                   console.log(info)
@@ -106,13 +100,13 @@ export default class CalendarFull extends React.Component {
                 <FormGroup>
                   <Label>Class</Label>
                   <Input type="text" 
-                  value={this.state.class} onChange={this.handleForm}
+                  value={this.state.addClass.class} onChange={this.handleForm}
                   required name="class" placeholder="class name" />
                 </FormGroup>
                 <FormGroup>
                   <Label>Course</Label>
                   <Input type="select" name="course" required 
-                    onChange={this.handleForm} value={this.state.course}>
+                    onChange={this.handleForm} value={this.state.addClass.course}>
                     <option value="Maths">Maths</option>
                     <option value="Physics">Physics</option>
                     <option value="Science">Science</option>
@@ -123,7 +117,7 @@ export default class CalendarFull extends React.Component {
                 <FormGroup>
                   <Label>Professor</Label>
                   <Input type="select" name="professor" required
-                   onChange={this.handleForm} value={this.state.professor}>
+                   onChange={this.handleForm} value={this.state.addClass.professor}>
                     <option value="Jane Doe">Jane Doe</option>
                     <option value="Titi">Titi</option>
                     <option value="Jasser">Jasser</option>
@@ -134,13 +128,13 @@ export default class CalendarFull extends React.Component {
                 <FormGroup>
                   <Label>Start Date</Label>
                   <Input type="datetime-local" name="start" 
-                    value={this.state.start} onChange={this.handleForm} required>
+                    value={this.state.addClass.start} onChange={this.handleForm} required>
                   </Input>
                 </FormGroup>
                 <FormGroup>
                   <Label>Repeat</Label>
                   <Input type="select" name="repeat" required
-                   onChange={this.handleForm} value={this.state.repeat}>
+                   onChange={this.handleForm} value={this.state.addClass.repeat}>
                     <option value="1">Only This Time</option>
                     <option value="7">Every Week</option>
                   </Input>
@@ -148,12 +142,12 @@ export default class CalendarFull extends React.Component {
                 <FormGroup>
                   <Label>Class Background Color</Label>
                   <Input type="color" name="color" 
-                    value={this.state.color} onChange={this.handleForm}/>
+                    value={this.state.addClass.color} onChange={this.handleForm}/>
                 </FormGroup>
                 <FormGroup>
                   <Label>Class Text Color</Label>
                   <Input type="color" name="textColor" 
-                    value={this.state.textColor} onChange={this.handleForm}/>
+                    value={this.state.addClass.textColor} onChange={this.handleForm}/>
                 </FormGroup>
               </Form>
               </ModalBody>
