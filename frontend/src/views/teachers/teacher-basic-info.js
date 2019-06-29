@@ -21,7 +21,7 @@ class BasicInfo extends Component {
         return (
             <div>
                 <form >
-                    <div class="form-row">
+                    <div className="form-row">
                         <div className="form-group col-md-6">
                             <input type="text" className="form-control" id="inputName" placeholder="Full Name" required />
                         </div>
@@ -29,7 +29,7 @@ class BasicInfo extends Component {
                             <input type="date" className="form-control" id="inputdate" placeholder="Date of birth" required />
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div className="form-row">
                         <div className="form-group col-md-6">
                             <select id="inputState" className="form-control"  >
                                 <option selected>Select Gender</option>
@@ -46,7 +46,7 @@ class BasicInfo extends Component {
                             </select>
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div className="form-row">
                         <div className="form-group col-md-6">
                             <input type="email" className="form-control" id="inputEmail" placeholder="Email" required />
                         </div>
@@ -54,25 +54,25 @@ class BasicInfo extends Component {
                             <input type="tel" className="form-control" id="inputTel" placeholder="Mobile.No" required />
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div className="form-row">
                         <div className="form-group col-md-10">
                             <input type="text" className="form-control" id="inputAdress" placeholder="Adress" required />
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div className="form-row">
                         <div className="form-group col-md-6">
-                            <select id="inputState" className="form-control"  >
+                            <select id="inputState" className="form-control" value="Tunis" >
                                 <option selected>Select City</option>
-                                <option>Tunis</option>
-                                <option>Sousse</option>
-                                <option>Sfax</option>
+                                <option value="Tunis">Tunis</option>
+                                <option value="Sousse">Sousse</option>
+                                <option value="Sfax">Sfax</option>
                             </select>
                         </div>
                         <div className="form-group col-md-4">
                             <input type="text" className="form-control" id="inputZip" placeholder="Zip Code" required />
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div className="form-row">
                         <div className="form-group col-md-2">
                             <ImageUpload />
                         </div>

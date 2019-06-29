@@ -77,7 +77,7 @@ export default class CalendarFull extends React.Component {
                 themeSystem='bootstrap'
                 dateClick={(info) =>{
                   console.log(info)
-                  this.setState({add: true, start: moment(info.date).format('YYYY-MM-DDTHH:mm')})
+                  this.setState({add: true, addClass:{start: moment(info.date).format('YYYY-MM-DDTHH:mm')}})
                 }}
                 eventPositioned={(info)=>{
                   console.log('eventPositioned', info)
@@ -152,7 +152,7 @@ export default class CalendarFull extends React.Component {
               </Form>
               </ModalBody>
               <ModalFooter>
-                <Button name="add" color="primary" onClick={this.toggle}>Add Class</Button>{' '}
+                <Button name="add" color="primary" onClick={this.toggle}>Add</Button>{' '}
                 <Button name="add" color="secondary" onClick={this.toggle}>Cancel</Button>
               </ModalFooter>
             </Modal>
