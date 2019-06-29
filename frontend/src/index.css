@@ -45,3 +45,13 @@ code {
 .logout:focus{
   outline: none;
 }
+.add_classe{
+  display: block !important;
+}
+.modal_body{
+  overflow-y: initial !important
+}
+.form{
+  height: 550px;
+  overflow-y: auto;
+}

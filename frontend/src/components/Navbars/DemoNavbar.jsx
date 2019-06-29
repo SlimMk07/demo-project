@@ -4,8 +4,6 @@ import {
   Container, InputGroup, InputGroupText, InputGroupAddon, Input
 } from "reactstrap";
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-
 
 
 import routes from "routes.js";
@@ -161,10 +159,8 @@ class Header extends React.Component {
                   </p>
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem tag="a">Help</DropdownItem>
-                  <Link to={'/admin/dashboard'} >
-                    <p className='logout' onClick={this.disconnect}>Logout</p>
-                  </Link>
+                  <DropdownItem tag="a" onClick={()=>{this.props.history.push('/help');}}>Help</DropdownItem>
+                  <DropdownItem onClick={this.disconnect}>Logout</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             </Nav>
