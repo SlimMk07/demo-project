@@ -17,17 +17,20 @@ export default class CalendarFull extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      add: false, update: false,
+      /** modal */
+      add: false,
       /** to add a class */
       class:'class',
       course:"Science",
       professor:'Titi',
       start:moment(new Date()).format('YYYY-MM-DDTHH:mm'),
       end:moment(new Date()).format('YYYY-MM-DDTHH:mm'),
-      color: '#ff4444',
-      textColor: '#ffebee',
+      color: '#055049',
+      textColor: '#faf35e',
       repeat:'7',
-
+      /** notification */
+      visible: true,
+      /** classes in the calendar */
       events:[
         { id: 99, title: 'event 1', start: '2019-05-01', end: '2019-05-10', color:'red', url: 'http://google.com/' },
         { title: 'event 2', date: '2019-05-09', color: 'blue' },
@@ -49,8 +52,10 @@ export default class CalendarFull extends React.Component {
       professor:this.state.professor, start:this.state.start, color:this.state.color, 
       textColor:this.state.textColor, repeat:this.state.repeat, end:this.state.end})
     this.setState({events: this.state.events.concat(newEvents)})
-
   }
+  onDismiss=()=>{
+    this.setState({visible: !this.state.visible})
+}
   handleForm=(e)=>{
     this.setState({[e.target.name]: e.target.value})
   }
@@ -88,13 +93,14 @@ export default class CalendarFull extends React.Component {
                 eventPositioned={({event, isStart, isEnd})=>{
                   if (isStart && isEnd){
                     console.log('eventPositioned', event)
+                    console.log('eventClick1', '\nend:-'+event.end, '\ngroupid-'+event.groupId, '\nid-'+event.id, 
+                  '\nstart-'+event.start, 
+                  '\ntextcolor-'+event.textColor, '\ncolor-'+event.color, '\ntitle-'+event.title, '\nurl-'+event.url,
+                  '\nbgcolor-'+event.backgroundColor)
                   }
                 }}
                 eventResize={({event})=>{
                   console.log('eventResize', event)
-                }}
-                eventClick={({event})=>{
-                  this.setState({update: true})
                   console.log('eventClick1', '\nend:-'+event.end, '\ngroupid-'+event.groupId, '\nid-'+event.id, 
                   '\nstart-'+event.start, 
                   '\ntextcolor-'+event.textColor, '\ncolor-'+event.color, '\ntitle-'+event.title, '\nurl-'+event.url,
@@ -174,77 +180,6 @@ export default class CalendarFull extends React.Component {
               <ModalFooter>
                 <Button name="add" color="primary" onClick={this.addClass}>Add</Button>{' '}
                 <Button name="add" color="secondary" onClick={this.toggle}>Cancel</Button>
-              </ModalFooter>
-            </Modal>
-
-            <Modal isOpen={this.state.update} toggle={this.toggle} className="add_classes">
-              <ModalHeader name="update">Update Class</ModalHeader>
-              <ModalBody>
-                <Form className='form'> 
-                  <FormGroup>
-                    <Label>Class</Label>
-                    <Input type="text" 
-                    value={this.state.class} onChange={this.handleForm}
-                    required name="class" placeholder="class name" />
-                  </FormGroup>
-                  <FormGroup>
-                    <Label>Course</Label>
-                    <Input type="select" name="course" required 
-                      onChange={this.handleForm} value={this.state.course}>
-                      <option value="Maths">Maths</option>
-                      <option value="Physics">Physics</option>
-                      <option value="Science">Science</option>
-                      <option value="Dance">Dance</option>
-                      <option value="Sport">Sport</option>
-                    </Input>
-                  </FormGroup>
-                  <FormGroup>
-                    <Label>Professor</Label>
-                    <Input type="select" name="professor" required
-                    onChange={this.handleForm} value={this.state.professor}>
-                      <option value="Jane Doe">Jane Doe</option>
-                      <option value="Titi">Titi</option>
-                      <option value="Jasser">Jasser</option>
-                      <option value="Asma">Asma</option>
-                      <option value="Nessrine">Nessrine</option>
-                    </Input>
-                  </FormGroup>
-                  <FormGroup>
-                    <Label>Start Date</Label>
-                    <Input type="datetime-local" name="start" 
-                      value={this.state.start} onChange={this.handleForm} required>
-                    </Input>
-                  </FormGroup>
-                  <FormGroup>
-                    <Label>Repeat</Label>
-                    <Input type="select" name="repeat" required
-                    onChange={this.handleForm} value={this.state.repeat}>
-                      <option value="1">Only This Time</option>
-                      <option value="7">Every Week</option>
-                    </Input>
-                  </FormGroup>
-                  <FormGroup>
-                    <Label>End Date</Label>
-                    <Input type="datetime-local" name="end" 
-                      value={this.state.end} onChange={this.handleForm}>
-                    </Input>
-                  </FormGroup>
-                  <FormGroup>
-                    <Label>Class Background Color</Label>
-                    <Input type="color" name="color" 
-                      value={this.state.color} onChange={this.handleForm}/>
-                  </FormGroup>
-                  <FormGroup>
-                    <Label>Class Text Color</Label>
-                    <Input type="color" name="textColor" 
-                      value={this.state.textColor} onChange={this.handleForm}/>
-                  </FormGroup>
-                </Form>
-              </ModalBody>
-              <ModalFooter>
-                <a name="update" href="/" color="danger" style={{color: 'red', marginRight:'5.25rem'}} onClick={this.toggle}>Remove</a>{' '}
-                <Button name="update" color="primary" onClick={this.toggle}>Update</Button>{' '}
-                <Button name="update" color="secondary" onClick={this.toggle}>Cancel</Button>
               </ModalFooter>
             </Modal>
           </div>

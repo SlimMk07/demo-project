@@ -45,6 +45,7 @@ const f = (objectC) => {
           .setDate(new Date(x).getDate() + 7))
           .format('YYYY-MM-DDTHH:mm')
       }
+      console.log('events', events)
       return events
     }
     default: return addOneClass(objectC, duration)

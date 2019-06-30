@@ -72,7 +72,7 @@ class Notifications extends React.Component {
                     Handcrafted by our colleague
                   </p>
                 </CardHeader>
-                {/* <CardBody>
+                <CardBody>
                   <Row>
                     <Col md="6">
                       <Card className="card-plain">
@@ -248,7 +248,7 @@ class Notifications extends React.Component {
                       </Col>
                     </Row>
                   </div>
-                </CardBody>*/}
+                </CardBody>
               </Card>
             </Col> 
           </Row>
