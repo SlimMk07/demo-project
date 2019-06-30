@@ -30,14 +30,29 @@ class CalendarFull extends React.Component {
       end: moment(new Date()).format('YYYY-MM-DDTHH:mm'),
       color: '#055049',
       textColor: '#faf35e',
-      repeat: '7'
+      repeat: '7',
+      /** decide when component should update */
+      shouldUpdate: false
     };
   }
 
   componentDidMount = () => {
     axios.get('/classes').then((res) => this.props.initClassesReducer(res.data))
   }
+  // shouldComponentUpdate=(nextProps, nextState) =>{
+  //   if (nextState.shouldUpdate === true) return true
+  //   else return false
+  // }
+  // componentWillReceiveProps=(nextProps)=>{
+  //   this.setState({shouldUpdate : false})
+  // }
 
+  // initClasses=(info, successCallback, failureCallback)=>{
+  //   console.log('info', info)
+  //   axios.get('/classes')
+  //   .then((res) => successCallback(res))
+  //   .catch((err)=> failureCallback(err))
+  // }
   addClass = (e) => {
     this.toggle(e)
     const newEvents = createClass({
@@ -45,10 +60,13 @@ class CalendarFull extends React.Component {
       professor: this.state.professor, start: this.state.start, color: this.state.color,
       textColor: this.state.textColor, repeat: this.state.repeat, end: this.state.end
     })
-    this.setState({ events: this.state.events.concat(newEvents) },
-      () => axios.post('/add_classes', newEvents)
-        .then(() => this.props.addClassReducer(newEvents))
-        .catch((err) => console.log('add_classes', err)))
+    axios.post('/add_classes', newEvents)
+      .then(() => {
+        this.props.addClassReducer(newEvents)
+      })
+      .then(()=>{axios.get('/classes').then((res) => this.props.initClassesReducer(res.data))})
+      .then(()=>this.setState(this.state))
+      .catch((err) => console.log('add_classes', err))
   }
 
   handleForm = (e) => {
@@ -64,6 +82,7 @@ class CalendarFull extends React.Component {
   }
 
   render() {
+    // this.setState({shouldUpdate: false})
     return (
       <>
         <div className="content">
@@ -89,10 +108,6 @@ class CalendarFull extends React.Component {
                     })
                     }
                     eventPositioned={({ event, isStart, isEnd, isMirror }) => {
-                      // console.log('id', event.id)
-                      // console.log('title', event.title)
-                      // console.log('start', event.start)
-                      // console.log('end', event.end)
                       console.log(isStart, isEnd, isMirror, event.id, event)
                       if (isStart && isEnd && isMirror) {
                         axios.put(`/update_classes/${event.id}`, { id: parseFloat(event.id), start: event.start, end: event.end })
