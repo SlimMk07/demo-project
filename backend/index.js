@@ -171,12 +171,16 @@ MongoClient.connect(mongourl, { useNewUrlParser: true }, (err, client) => {
     })
   })
 
-  app.put('/update_classes/:id', bodyParser.json(), (req, res) => {
-    let ID = ObjectID(req.params.id)
+  app.put('/update_classes/:id', (req, res) => {
+    console.log('body', req.body)
     let modifiedContact = req.body
-    db.collection('classes').findOneAndUpdate({ _id: ID }, { $set: { ...modifiedContact } }, (err, data) => {
+    db.collection('classes').findOneAndUpdate({ id: modifiedContact.id }, 
+      { $set: { start: modifiedContact.start, end: modifiedContact.end } }, (err, data) => {
       if (err) res.send("error")
-      else res.send(data)
+      else {
+        console.log('data', data)
+        res.send(data)
+      }
     })
   })
 
