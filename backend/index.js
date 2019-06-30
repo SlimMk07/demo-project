@@ -147,10 +147,10 @@ MongoClient.connect(mongourl, { useNewUrlParser: true }, (err, client) => {
     })
   })
 
-  app.post('/add_classes', (req, res) => {
+  app.post('/add_classes', bodyParser.urlencoded({ extended: true }), (req, res) => {
     console.log(req.body)
     let new_product = req.body
-    db.collection('classes').insertOne(new_product, (err, data) => {
+    db.collection('classes').insertMany(new_product, (err, data) => {
       if (err) res.send(err)
       else res.send(data)
     })

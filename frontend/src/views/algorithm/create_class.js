@@ -20,7 +20,7 @@ const f = (objectC) => {
   const duration = 90
 
   switch (objectC.repeat) {
-    case '1': return addOneClass(objectC, duration)
+    case '1': return [addOneClass(objectC, duration)]
     case '7': {
       let x = moment(new Date(objectC.start)).format('YYYY-MM-DDTHH:mm')
       let events = []
@@ -48,7 +48,7 @@ const f = (objectC) => {
       console.log('events', events)
       return events
     }
-    default: return addOneClass(objectC, duration)
+    default: return [addOneClass(objectC, duration)]
   }
 }
 

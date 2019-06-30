@@ -57,12 +57,10 @@ class CalendarFull extends React.Component {
       textColor: this.state.textColor, repeat: this.state.repeat, end: this.state.end
     })
     this.setState({ events: this.state.events.concat(newEvents) }, 
-    ()=>axios.post('/add_classes', { ...this.state.events })
-      .then(() => this.props.addClassReducer({ ...this.state.events }))
-      .catch((err) => alert(err)))
-    // axios.post('/add_classes', { ...this.state })
-    //   .then(() => this.props.addClassReducer({ ...this.state.events }))
-    //   .catch((err) => alert(err))
+    ()=>{console.log('before axios', newEvents)
+      axios.post('/add_classes', newEvents)
+      .then(() => this.props.addClassReducer(newEvents))
+      .catch((err) => alert(err))})
   }
   onDismiss = () => {
     this.setState({ visible: !this.state.visible })

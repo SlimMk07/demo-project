@@ -2,7 +2,7 @@
   "name": "paper-dashboard-react",
   "version": "1.1.0",
   "private": true,
-  "proxy":"http://localhost:3100",
+  "proxy": "http://localhost:3100",
   "homepage": "https://demos.creative-tim.com/paper-dashboard-react/#/dashboard",
   "dependencies": {
     "@fullcalendar/bootstrap": "^4.2.0",
@@ -19,6 +19,7 @@
     "firebaseui": "^4.0.0",
     "fullcalendar-reactwrapper": "^1.0.7",
     "history": "4.9.0",
+    "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "node-sass": "4.12.0",
     "perfect-scrollbar": "1.4.0",
