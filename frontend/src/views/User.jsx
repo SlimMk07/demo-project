@@ -33,8 +33,8 @@ class User extends React.Component {
                   <div className="author">
                     <a href="#pablo" onClick={e => e.preventDefault()}>
                       <img
-                        alt="..."
-                        className="avatar border-gray"
+                        alt="..." height="100rem" width="100rem"
+                        className="avatar "
                         src={require("assets/img/mike.jpg")}
                       />
                       <h5 className="title">Chet Faker</h5>

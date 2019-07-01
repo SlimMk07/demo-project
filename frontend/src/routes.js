@@ -1,6 +1,5 @@
 import Dashboard from "views/Dashboard.jsx";
 import Calendar from "views/Calendar.jsx";
-import TableList from "views/Tables.jsx";
 import Teacher from "views/teachers-folder/teacher";
 import Student from "views/students-folder/student";
 import Course from "views/courses-folder/course";
@@ -88,14 +87,6 @@ var routes = [
     icon: "",
     component: Course,
     layout: "/admin"
-  },
-  {
-    path: "/help",
-    name: "Help",
-    icon: "nc-icon nc-alert-circle-i",
-    component: TableList,
-    layout: "/admin"
   }
-
 ];
 export default routes;

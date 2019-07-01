@@ -14,6 +14,7 @@ function OneStudent(props) {
                     {student.button}
                 </div>
             </div>
+
         </div>
     )
     return studentsHtml

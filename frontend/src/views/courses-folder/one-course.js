@@ -14,6 +14,7 @@ function OneCourse(props) {
                     {course.button}
                 </div>
             </div>
+
         </div>
     )
     return coursesHtml

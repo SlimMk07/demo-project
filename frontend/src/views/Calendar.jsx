@@ -31,28 +31,12 @@ class CalendarFull extends React.Component {
       color: '#055049',
       textColor: '#faf35e',
       repeat: '7',
-      /** decide when component should update */
-      shouldUpdate: false
     };
   }
 
   componentDidMount = () => {
     axios.get('/classes').then((res) => this.props.initClassesReducer(res.data))
   }
-  // shouldComponentUpdate=(nextProps, nextState) =>{
-  //   if (nextState.shouldUpdate === true) return true
-  //   else return false
-  // }
-  // componentWillReceiveProps=(nextProps)=>{
-  //   this.setState({shouldUpdate : false})
-  // }
-
-  // initClasses=(info, successCallback, failureCallback)=>{
-  //   console.log('info', info)
-  //   axios.get('/classes')
-  //   .then((res) => successCallback(res))
-  //   .catch((err)=> failureCallback(err))
-  // }
   addClass = (e) => {
     this.toggle(e)
     const newEvents = createClass({
