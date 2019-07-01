@@ -1,18 +1,20 @@
 import React from 'react'
 import './teacher-list.css'
 
-function OneTeacher (props) {
+function OneTeacher(props) {
     const teacher = props.teacher
-    let teachersHtml=[]
+    let teachersHtml = []
 
     teachersHtml = teacher.map((teacher, i) =>
-    <div key={i} className='one-teacher col-3'>
-        <img src={teacher.image} alt='image'/>
-        <div className='teachers-name'>
-            <p>{teacher.name}</p>
-            {teacher.button}
+        <div key={i} className="card-deck one-teacher">
+            <div className="card">
+                <img src={teacher.image} className="card-img-top" alt="image" />
+                <div className="card-body">
+                    <h5 className="card-title teachers-name">{teacher.name}</h5>
+                    {teacher.button}
+                </div>
+            </div>
         </div>
-    </div>
     )
     return teachersHtml
 }
