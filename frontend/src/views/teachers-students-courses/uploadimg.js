@@ -33,7 +33,7 @@ class ImageUpload extends React.Component {
       if (imagePreviewUrl) {
         $imagePreview = React.createElement("img", { src: imagePreviewUrl });
       } else {
-        $imagePreview = React.createElement("div", { className: "previewText" }, "Teacher Photo");
+        $imagePreview = React.createElement("div", { className: "previewText" }, "Add Photo");
       }
   
       return (
