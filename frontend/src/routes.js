@@ -2,8 +2,8 @@ import Dashboard from "views/Dashboard.jsx";
 import Calendar from "views/Calendar.jsx";
 import TableList from "views/Tables.jsx";
 import UserPage from "views/User.jsx";
-import Notification from "views/Notifications.jsx"
 import Teacher from "views/teacher"
+import User from 'views/User.jsx'
 
 var routes = [
   {
@@ -24,7 +24,7 @@ var routes = [
     path: "/professors",
     name: "Professors",
     icon: "nc-icon nc-single-02",
-    component: Notification,
+    component: User,
     layout: "/admin"
   },
   {
@@ -58,14 +58,6 @@ var routes = [
     name: "Add Courses",
     component: TableList,
     layout: "/admin"
-  },
-  {
-    path: "/help",
-    name: "Help",
-    icon: "nc-icon nc-alert-circle-i",
-    component: TableList,
-    layout: "/admin"
   }
-
 ];
 export default routes;

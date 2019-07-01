@@ -3991,7 +3991,7 @@ License - nucleoapp.com/license/
     width: 30px;
     height: 30px;
     overflow: hidden;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     margin-bottom: 15px; }
   .card .numbers {
     font-size: 2em; }
@@ -4085,7 +4085,7 @@ License - nucleoapp.com/license/
 .card-user .avatar {
   width: 124px;
   height: 124px;
-  border: 1px solid #FFFFFF;
+  /* border: 1px solid #FFFFFF; */
   position: relative; }
 
 .card-user .card-body {
