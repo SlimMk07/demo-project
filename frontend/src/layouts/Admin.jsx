@@ -39,7 +39,6 @@ class Dashboard extends React.Component {
     }
   }
   handleActiveClick = color => {
-    console.log('activecolor', color)
     this.setState({ activeColor: color });
   };
   handleBgClick = color => {

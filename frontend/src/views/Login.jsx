@@ -37,7 +37,6 @@ class FormPage extends Component {
       this.props.login({user, signOut})
     }
     return (this.state.isConnected !== nextState.isConnected)
-    
   }
 
   signInSignUp = () => {

@@ -4,8 +4,6 @@ import {
   Container, InputGroup, InputGroupText, InputGroupAddon, Input
 } from "reactstrap";
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-
 
 
 import routes from "routes.js";
@@ -22,9 +20,19 @@ class Header extends React.Component {
     this.dropdownToggle = this.dropdownToggle.bind(this);
     this.sidebarToggle = React.createRef();
   }
-  disconnect=()=>{
-    this.props.user.connection.signOut()
-    this.props.disconnect()
+  disconnect=(e)=>{
+    e.preventDefault()
+    try{
+      this.props.user.connection.signOut().then(()=>this.props.disconnect())
+      this.props.history.push('/'); 
+    }
+    catch(err){
+      console.log(err)
+      this.props.history.push('/'); 
+    }  
+    finally{
+      this.props.history.push('/'); 
+    }
   }
   toggle() {
     if (this.state.isOpen) {
@@ -146,15 +154,10 @@ class Header extends React.Component {
               >
                 <DropdownToggle caret nav>
                   <i className="nc-icon nc-settings-gear-65" />
-                  <p>
-                    <span className="d-lg-none d-md-block">Some Actions</span>
-                  </p>
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem tag="a">Help</DropdownItem>
-                  <Link to={this.props.user.isConnected ? '/admin/dashboard' : '/'} onClick={this.disconnect}>
-                    Logout
-                  </Link>
+                  <DropdownItem tag="a" onClick={()=>{this.props.history.push('/help');}}>Help</DropdownItem>
+                  <DropdownItem onClick={this.disconnect}>Logout</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             </Nav>
@@ -166,7 +169,6 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('got state', state)
   return {
     user: state.user
   }

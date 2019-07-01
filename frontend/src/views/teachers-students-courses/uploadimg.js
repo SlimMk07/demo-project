@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-class ImageUpload extends React.Component {
+class ImageUpload extends Component {
     constructor(props) {
       super(props);
       this.state = { file: '', imagePreviewUrl: '' };
@@ -48,9 +48,6 @@ class ImageUpload extends React.Component {
   
         React.createElement("div", { className: "imgPreview" },
         $imagePreview)));
-  
-  
-  
     }}
   
   
