@@ -21,7 +21,7 @@ class BasicInfo3 extends Component {
         return (
             <div>
                 <form >
-                    <div class="form-row">
+                    <div className="form-row">
                         <div className="form-group col-md-5">
                             <input type="text" className="form-control" id="inputName" placeholder="Course Name" required />
                         </div>
@@ -30,18 +30,18 @@ class BasicInfo3 extends Component {
                         </div>
                         <p className='duration'>Minutes</p>
                     </div>
-                    <div class="form-row">
+                    <div className="form-row">
                         <div className="form-group col-md-10">
                             <textarea className="form-control" id="exampleFormControlTextarea1" rows={3} placeholder="Course Description"/>
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div className="form-row">
                         <div className="form-group col-md-9">
                             <input type="number" className="form-control" id="inputprice" placeholder="Course Price" required />
                         </div>
                         <p className='price'>DT</p>
                     </div>
-                    <div class="form-row">
+                    <div className="form-row">
                         <div className="form-group col-md-2">
                             <ImageUpload />
                         </div>

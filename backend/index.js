@@ -13,14 +13,6 @@ MongoClient.connect(mongourl, { useNewUrlParser: true }, (err, client) => {
   const db = client.db(database)
 
   /** professors managing */
-  app.delete('/delete_professor/:id', (req, res) => {
-    let ID = ObjectID(req.params.id)
-    db.collection('prof').findOneAndDelete({ _id: ID }, (err, data) => {
-      if (err) res.send(err)
-      else res.send(data)
-    })
-  })
-
   app.post('/add_professor', (req, res) => {
     console.log(req.body)
     let new_product = req.body
@@ -55,14 +47,6 @@ MongoClient.connect(mongourl, { useNewUrlParser: true }, (err, client) => {
   })
 
   /** students managing */
-  app.delete('/delete_student/:id', (req, res) => {
-    let ID = ObjectID(req.params.id)
-    db.collection('student').findOneAndDelete({ _id: ID }, (err, data) => {
-      if (err) res.send(err)
-      else res.send(data)
-    })
-  })
-
   app.post('/add_student', (req, res) => {
     console.log(req.body)
     let new_product = req.body
@@ -97,14 +81,6 @@ MongoClient.connect(mongourl, { useNewUrlParser: true }, (err, client) => {
   })
 
   /** corses managing */
-  app.delete('/delete_corse/:id', (req, res) => {
-    let ID = ObjectID(req.params.id)
-    db.collection('corses').findOneAndDelete({ _id: ID }, (err, data) => {
-      if (err) res.send(err)
-      else res.send(data)
-    })
-  })
-
   app.post('/add_corse', (req, res) => {
     console.log(req.body)
     let new_product = req.body
@@ -139,14 +115,6 @@ MongoClient.connect(mongourl, { useNewUrlParser: true }, (err, client) => {
   })
 
   /** Classes */
-  app.delete('/delete_classes/:id', (req, res) => {
-    let ID = ObjectID(req.params.id)
-    db.collection('classes').findOneAndDelete({ _id: ID }, (err, data) => {
-      if (err) res.send(err)
-      else res.send(data)
-    })
-  })
-
   app.post('/add_classes', bodyParser.urlencoded({ extended: true }), (req, res) => {
     console.log(req.body)
     let new_product = req.body

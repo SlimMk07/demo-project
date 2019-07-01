@@ -21,7 +21,7 @@ class BasicInfo extends Component {
         return (
             <div>
                 <form >
-                    <div class="form-row">
+                    <div className="form-row">
                         <div className="form-group col-md-4">
 
                             <input type="text" className="form-control" id="inputName" placeholder="Full Name" required />
@@ -38,7 +38,7 @@ class BasicInfo extends Component {
                             </select>
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div className="form-row">
                         <div className="form-group col-md-10">
                             <label >Teaching :</label>
                             <select multiple className="form-control" id="exampleFormControlSelect2" required>
