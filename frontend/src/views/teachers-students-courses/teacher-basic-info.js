@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import ImageUpload from "views/teachers/uploadimg"
+import ImageUpload from "views/teachers-students-courses/uploadimg"
 
 class BasicInfo extends Component {
     constructor(props) {
@@ -21,28 +21,34 @@ class BasicInfo extends Component {
         return (
             <div>
                 <form >
-                    <div className="form-row">
-                        <div className="form-group col-md-6">
+                    <div class="form-row">
+                        <div className="form-group col-md-4">
+
                             <input type="text" className="form-control" id="inputName" placeholder="Full Name" required />
                         </div>
-                        <div className="form-group col-md-4">
+                        <div className="form-group col-md-3">
                             <input type="date" className="form-control" id="inputdate" placeholder="Date of birth" required />
                         </div>
-                    </div>
-                    <div className="form-row">
-                        <div className="form-group col-md-6">
-                            <select id="inputState" className="form-control"  >
-                                <option selected>Select Gender</option>
+                        <div className="form-group col-md-3">
+                            <select id="inputState" className="form-control" required >
+                                <option>Select Gender</option>
+
                                 <option>Male</option>
                                 <option>Female</option>
                             </select>
                         </div>
-                        <div className="form-group col-md-4">
-                            <select id="inputdep" className="form-control"  >
-                                <option selected>Select Departement</option>
-                                <option>Informatique</option>
-                                <option>Science</option>
+                    </div>
+                    <div class="form-row">
+                        <div className="form-group col-md-10">
+                            <label >Teaching :</label>
+                            <select multiple className="form-control" id="exampleFormControlSelect2" required>
+                                <option>Math</option>
+                                <option>science</option>
                                 <option>Sport</option>
+                                <option>physics</option>
+                                <option>Music</option>
+                                <option>Painting</option>
+                                <option>English</option>
                             </select>
                         </div>
                     </div>
@@ -80,7 +86,6 @@ class BasicInfo extends Component {
                     <center><button type="submit" className="btn btn-primary">Save</button></center>
                 </form>
             </div>
-
         );
     }
 }

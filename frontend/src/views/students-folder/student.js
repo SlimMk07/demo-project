@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './teachers.css'
-import BasicInfo from 'views/teachers/teacher-basic-info'
-import SocialInfo from 'views/teachers/teacher-social-info'
+import './students.css'
+import BasicInfo2 from 'views/teachers-students-courses/student-basic-info'
+import SocialInfo from 'views/teachers-students-courses/teacher-social-info'
 import {Card, CardHeader, Row, Col} from "reactstrap";
 
-class Teacher extends Component {
+class Student extends Component {
   constructor(props) {
     super(props);
     this.state = {}
@@ -27,7 +27,7 @@ class Teacher extends Component {
           </li>
         </ul>
         <div className="tab-content" id="pills-tabContent">
-          <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"><BasicInfo /></div>
+          <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"><BasicInfo2 /></div>
           <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"><SocialInfo/></div>
         </div>
       </div>
@@ -46,4 +46,4 @@ class Teacher extends Component {
   }
 }
 
-export default Teacher;
+export default Student;
