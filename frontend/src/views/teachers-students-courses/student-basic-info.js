@@ -5,16 +5,12 @@ import ImageUpload from "views/teachers-students-courses/uploadimg"
 class BasicInfo2 extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-
-        }
+        this.state = {}
     }
     saveInfos = (e) => {
 
         if (e.target.name === 'img')
             this.setState({ image: URL.createObjectURL(e.target.files[0]) })
-
-
     }
 
     render() {
@@ -65,8 +61,7 @@ class BasicInfo2 extends Component {
                     </div>
                     <div className="form-row">
                         <div className="form-group col-md-6">
-                            <select id="inputState" className="form-control"  >
-                                <option selected>Select City</option>
+                            <select id="inputState" className="form-control" defaultValue="Tunis" >
                                 <option>Tunis</option>
                                 <option>Sousse</option>
                                 <option>Sfax</option>

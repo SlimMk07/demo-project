@@ -59,7 +59,7 @@ class Dashboard extends React.Component {
             {routes.map((prop, key) => {
               return (
                 <Route
-                  path={prop.layout + prop.path}
+                  exact path={prop.layout + prop.path}
                   component={prop.component}
                   key={key}
                 />

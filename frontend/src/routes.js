@@ -33,16 +33,14 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/profprofile",
+    path: "/professors/profile/:id",
     name: "Professors profile",
-    icon: "",
     component: TeacherProfile,
     layout: "/admin"
   },
   {
-    path: "/addprofs",
+    path: "/professors/add",
     name: "Add Professor",
-    icon: "",
     component: Teacher,
     layout: "/admin"
   },
@@ -54,16 +52,14 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/studprofile",
+    path: "/students/profile/:id",
     name: "Students profile",
-    icon: "",
     component: StudentProfile,
     layout: "/admin"
   },
   {
-    path: "/addstud",
+    path: "/students/add",
     name: "Add Student",
-    icon: "",
     component: Student,
     layout: "/admin"
   },
@@ -75,14 +71,14 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/courseinfo",
+    path: "/courses/profile/:id",
     name: "course informations",
     icon: "",
     component: CourseInfo,
     layout: "/admin"
   },
   {
-    path: "/addcourses",
+    path: "/courses/add",
     name: "Add Courses",
     icon: "",
     component: Course,
