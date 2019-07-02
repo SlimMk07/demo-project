@@ -1,7 +1,7 @@
 express = require('express')
 const assert = require('assert')
 const bodyParser = require('body-parser')
-const { MongoClient, ObjectID, Binary } = require('mongodb')
+const { MongoClient, ObjectID } = require('mongodb')
 const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
 
@@ -9,7 +9,9 @@ const upload = multer({ dest: 'uploads/' })
 
 
 const app = express();
-app.use(bodyParser.json())
+app.use(bodyParser.json({limit: '50mb'})) 
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}))
+
 const mongourl = 'mongodb://localhost:27017'
 const database = 'education'
 
@@ -86,9 +88,10 @@ MongoClient.connect(mongourl, { useNewUrlParser: true }, (err, client) => {
   })
 
   /** corses managing */
-  app.post('/add_corse', upload.none(), (req, res) => {
+  app.post('/add_corse', (req, res) => {
     console.log(req.body)
     let new_product = req.body
+    //new_product.picture = Binary(req.body.picture)
     db.collection('corses').insertOne(new_product, (err, data) => {
       if (err) res.send(err)
       else res.send(data)
