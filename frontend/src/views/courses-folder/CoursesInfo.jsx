@@ -1,13 +1,6 @@
 import React from "react";
 
-// reactstrap components
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  CardTitle,
+import { Button, Card, CardHeader, CardBody, CardFooter, CardTitle,
   FormGroup,
   Form,
   Input,
@@ -24,19 +17,12 @@ class CourseInfo extends React.Component {
             <Col md="4">
               <Card className="card-user">
                 <div className="image">
-                  <img
-                    alt="..."
-                    src={require("assets/img/damir-bosnjak.jpg")}
-                  />
+                  <img alt="..." src={require("assets/img/damir-bosnjak.jpg")} />
                 </div>
                 <CardBody>
                   <div className="author">
                     <a href="#pablo" onClick={e => e.preventDefault()}>
-                      <img
-                        alt="..."
-                        className="avatar border-gray"
-                        src={require("assets/img/mike.jpg")}
-                      />
+                      <img alt="..." className="avatar border-gray" src={require("assets/img/mike.jpg")} />
                       <h5 className="title">Chet Faker</h5>
                     </a>
                     <p className="description">@chetfaker</p>

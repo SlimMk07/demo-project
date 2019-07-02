@@ -28,30 +28,18 @@ class ImageUpload extends Component {
 
   render() {
     let { imagePreviewUrl } = this.state;
-    let $imagePreview = null;
-    if (imagePreviewUrl) {
-      $imagePreview = React.createElement("img", { src: imagePreviewUrl });
-    } else {
-      $imagePreview = React.createElement("div", { className: "previewText" }, "Add Photo");
-    }
-
+    let $imagePreview = (imagePreviewUrl)? <img src='imagePreviewUrl' alt="prev"/> : <div className="previewText">"Add Photo"</div>
+    console.log(this.state.file, this.state.imagePreviewUrl)
+   
     return (
-      React.createElement("div", { className: "previewComponent" },
-        React.createElement("div", { onSubmit: e => this._handleSubmit(e) },
-          React.createElement("input", {
-            className: "fileInput",
-            type: "file",
-            onChange: e => this._handleImageChange(e)
-          }),
-          React.createElement("button", {
-            className: "submitButton",
-            type: "submit",
-            onClick: e => this._handleSubmit(e)
-          }, "Select file")
-        ),
-        React.createElement("div", { className: "imgPreview" },
-          $imagePreview)));
-  }
+      <div className="previewComponent">
+        <div onSubmit={e => this._handleSubmit(e)}>
+          <input type="file" className="image" onChange={e => this._handleImageChange(e)}></input>
+          <button className="submitButton" type="submit" onClick={e => this._handleSubmit(e)}>"Select file"</button>
+          <div className='imgPreview'>{$imagePreview}</div>
+        </div>
+      </div>
+    )}
 }
 
 

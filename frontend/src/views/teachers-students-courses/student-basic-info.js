@@ -27,8 +27,8 @@ class BasicInfo2 extends Component {
                         <div className="form-group col-md-3">
                             <select id="inputState" className="form-control" required >
                                 <option>Select Gender</option>
-                                <option>Male</option>
-                                <option>Female</option>
+                                <option value='0'>Male</option>
+                                <option value='1'>Female</option>
                             </select>
                         </div>
                     </div>
