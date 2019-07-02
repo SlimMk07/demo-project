@@ -1,6 +1,20 @@
 
 import React, { Component } from 'react';
-import ImageUpload from "views/teachers-students-courses/uploadimg"
+import ImageUpload from "views/teachers-students-courses/uploadimg";
+// reactstrap components
+import {
+    Button,
+    Card,
+    CardHeader,
+    CardBody,
+    CardFooter,
+    CardTitle,
+    FormGroup,
+    Form,
+    Input,
+    Row,
+    Col
+  } from "reactstrap";
 
 class BasicInfo extends Component {
     constructor(props) {
@@ -66,18 +80,29 @@ class BasicInfo extends Component {
                         </div>
                     </div>
                     <div className="form-row">
-                        <div className="form-group col-md-6">
-                            <select id="inputState" className="form-control" value="Tunis" >
+                    <div className="form-group col-md-6">
+                            <select id="inputState" className="form-control"  >
                                 <option selected>Select City</option>
-                                <option value="Tunis">Tunis</option>
-                                <option value="Sousse">Sousse</option>
-                                <option value="Sfax">Sfax</option>
+                                <option>Tunis</option>
+                                <option>Sousse</option>
+                                <option>Sfax</option>
                             </select>
                         </div>
                         <div className="form-group col-md-4">
                             <input type="text" className="form-control" id="inputZip" placeholder="Zip Code" required />
                         </div>
                     </div>
+                    <Row>
+                      <Col md="10">
+                        <FormGroup>
+                          <label>About</label>
+                          <Input
+                            type="textarea"
+                            defaultValue="Oh so, your weak rhyme You doubt I'll bother, reading into it"
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
                     <div className="form-row">
                         <div className="form-group col-md-2">
                             <ImageUpload />

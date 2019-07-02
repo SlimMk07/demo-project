@@ -14,7 +14,6 @@ function OneTeacher(props) {
                     {teacher.button}
                 </div>
             </div>
-
         </div>
     )
     return teachersHtml

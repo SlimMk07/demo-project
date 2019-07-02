@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardHeader, Row, Col } from "reactstrap";
 import OneTeacher from './one-teacher';
-
+import './teachers.css'
 const teachers = [
     {
         image: require('./teachers-img/1.jpg'),
@@ -19,14 +19,14 @@ const teachers = [
         name: 'Mustapha',
         button: <button type="button" className="btn btn-primary btn-sm">Infos</button>
 
-    }, 
+    },
     {
         image: require('./teachers-img/2.jpg'),
         name: 'Fawzia',
         button: <button type="button" className="btn btn-primary btn-sm">Infos</button>
 
     },
-    
+
     {
         image: require('./teachers-img/5.jpg'),
         name: 'Diego',
@@ -56,33 +56,41 @@ const teachers = [
         button: <button type="button" className="btn btn-primary btn-sm">Infos</button>
 
     },
-   
+
 ]
 
 
 function TeacherList() {
     return (
+
+
         <>
             <div className="content">
+            <Row>
+                    <Col md="12">
+                        <Card>
+                            
+                                <button type="submit" className="btn btn-success add-teacher-btn">Add professor+</button>
+                           
+                        </Card>
+                    </Col>
+                </Row>
                 <Row>
                     <Col md="12">
                         <Card>
                             <CardHeader>
                                 <div className='teachers-list'>
-                                        <div className='row teachers'>
-                                            <OneTeacher teacher={teachers} />
+                                    <div className='row teachers'>
+                                        <OneTeacher teacher={teachers} />
                                     </div>
                                 </div>
                             </CardHeader>
                         </Card>
                     </Col>
                 </Row>
+
             </div>
         </>
-
-
-
-
 
     );
 }

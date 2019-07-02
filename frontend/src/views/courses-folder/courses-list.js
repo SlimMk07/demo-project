@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardHeader, Row, Col } from "reactstrap";
 import OneCourse from './one-course';
-
+import './courses.css'
 const courses = [
     {
         image: require('./courses-img/1.jpg'),
@@ -41,6 +41,15 @@ function CourseList() {
     return (
         <>
             <div className="content">
+            <Row>
+                    <Col md="12">
+                        <Card>
+
+                            <button type="submit" className="btn btn-success add-course-btn">Add Course+</button>
+
+                        </Card>
+                    </Col>
+                </Row>
                 <Row>
                     <Col md="12">
                         <Card>

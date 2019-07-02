@@ -1,5 +1,19 @@
 import React, { Component } from 'react';
 import ImageUpload from "views/teachers-students-courses/uploadimg"
+// reactstrap components
+import {
+    Button,
+    Card,
+    CardHeader,
+    CardBody,
+    CardFooter,
+    CardTitle,
+    FormGroup,
+    Form,
+    Input,
+    Row,
+    Col
+  } from "reactstrap";
 
 
 class BasicInfo2 extends Component {
@@ -76,6 +90,17 @@ class BasicInfo2 extends Component {
                             <input type="text" className="form-control" id="inputZip" placeholder="Zip Code" required />
                         </div>
                     </div>
+                    <Row>
+                      <Col md="10">
+                        <FormGroup>
+                          <label>About</label>
+                          <Input
+                            type="textarea"
+                            defaultValue="Oh so, your weak rhyme You doubt I'll bother, reading into it"
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
                     <div class="form-row">
                         <div className="form-group col-md-2">
                             <ImageUpload />
