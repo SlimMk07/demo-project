@@ -2,11 +2,6 @@ express = require('express')
 const assert = require('assert')
 const bodyParser = require('body-parser')
 const { MongoClient, ObjectID } = require('mongodb')
-const multer = require('multer')
-const upload = multer({ dest: 'uploads/' })
-
-//app.use(bodyParser.urlencoded({extended: true}))
-
 
 const app = express();
 app.use(bodyParser.json({limit: '50mb'})) 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './courses.css'
-import CoursesInfo from 'views/teachers-students-courses/AddCoursesInfo'
+import 'views/courses-folder/courses.css'
+import CoursesInfo from 'views/courses-folder/AddCoursesInfo'
 import { Card, CardHeader, Row, Col } from "reactstrap";
 
 class Course extends Component {

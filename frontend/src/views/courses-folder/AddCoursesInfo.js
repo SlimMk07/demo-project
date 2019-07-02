@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './course.css'
+import 'views/courses-folder/courses.css'
 
 import { connect } from 'react-redux'
 import axios from 'axios'
