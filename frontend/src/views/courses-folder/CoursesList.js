@@ -1,5 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Card, CardHeader, Row, Col } from "reactstrap";
+import { BrowserRouter, Route, NavLink } from "react-router-dom";
+
 import OneCourse from './OneCourse';
 
 import { connect } from 'react-redux'
@@ -16,19 +18,26 @@ class CourseList extends Component {
   render() {
     return (<>
       <div className="content">
-        <Row>
-          <Col md="12">
-            <Card>
-              <CardHeader>
-                <div className='courses-list'>
-                  <div className='row courses'>
-                    <OneCourse course={this.props.corses} />
+        <BrowserRouter>
+          <Row>
+            <Col md="12">
+              <Card>
+                <CardHeader>
+                  <div className='courses-list'>
+                    <div className='row courses'>
+                      {this.props.corses.map((course) =>
+                        <NavLink key={course._id} to={`/courses/profile/${course._id}`}>
+                          <OneCourse course={course} />
+                        </NavLink>)}
+                    </div>
                   </div>
-                </div>
-              </CardHeader>
-            </Card>
-          </Col>
-        </Row>
+                </CardHeader>
+              </Card>
+            </Col>
+          </Row>
+          <hr />
+          <Route exact path={`/courses/profile/:id`} render={() => (<OneCourse course={this.props.match.params.id} />)} />
+        </BrowserRouter>
       </div>
     </>);
   }

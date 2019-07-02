@@ -1,22 +1,23 @@
-import React from 'react'
+import React, {Component} from 'react'
 import './course-list.css'
 
-function OneCourse(props) {
-    const course = props.course
-    let coursesHtml = []
-
-    coursesHtml = course.map((course, i) =>
-        <div key={i} className="card-deck one-course">
-            <div className="card">
-                <img src={course.picture} className="card-img-top" alt="pic"/>
-                <div className="card-body">
-                    <h5 className="card-title courses-name">{course.name}</h5>
-                    {course.button}
-                </div>
-            </div>
-
+class OneCourse extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
+  render() {
+    return (
+      <div className="card-deck one-course" >
+        <div className="card">
+          <img src={this.props.course.picture} className="card-img-top" alt="pic" />
+          <div className="card-body">
+            <h5 className="card-title courses-name">{this.props.course.name}</h5>
+            {/* {course.button} */}
+          </div>
         </div>
-    )
-    return coursesHtml
+      </div>);
+  }
 }
+
 export default OneCourse;

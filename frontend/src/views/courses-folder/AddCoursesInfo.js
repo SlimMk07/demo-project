@@ -7,7 +7,8 @@ import axios from 'axios'
 class BasicInfoCourse extends Component {
   constructor(props) {
     super(props);
-    this.state = { file: '', imagePreviewUrl: null, name: null, duration:null, description: null, price:null 
+    this.state = {
+      file: '', imagePreviewUrl: null, name: null, duration: null, description: null, price: null
     }
   }
   saveInfos = (e) => {
@@ -15,8 +16,8 @@ class BasicInfoCourse extends Component {
       this.setState({ image: URL.createObjectURL(e.target.files[0]) })
   }
 
-  handleChange = (e)=>{
-    this.setState({[e.target.name]:e.target.value})
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value })
   }
 
   _handleImgSubmit(e) {
@@ -38,19 +39,24 @@ class BasicInfoCourse extends Component {
     reader.readAsDataURL(file);
   }
 
-  addCourse=()=>{
-    if(!(this.state.imagePreviewUrl!= null || this.state.name!=null || this.state.duration!=null || 
-      this.state.description!=null || this.state.price!=null))
-    axios.post('/add_corse',{picture:this.state.imagePreviewUrl, name: this.state.name, 
-        duration:this.state.duration, description: this.state.description, price:this.state.price})
-      .then(()=>this.props.addCourseReducer({picture:this.state.imagePreviewUrl, name: this.state.name, 
-        duration:this.state.duration, description: this.state.description, price:this.state.price}))
-      .catch((err)=>alert(err)) 
+  addCourse = () => {
+    if (!(this.state.imagePreviewUrl != null || this.state.name != null || this.state.duration != null ||
+      this.state.description != null || this.state.price != null))
+      axios.post('/add_corse', {
+        picture: this.state.imagePreviewUrl, name: this.state.name,
+        duration: this.state.duration, description: this.state.description, price: this.state.price
+      })
+        .then(() => this.props.addCourseReducer({
+          picture: this.state.imagePreviewUrl, name: this.state.name,
+          duration: this.state.duration, description: this.state.description, price: this.state.price
+        }))
+        .then(()=>this.props.history.push('/courses'))
+        .catch((err) => alert(err))
   }
 
   render() {
     let { imagePreviewUrl } = this.state;
-    let $imagePreview = (imagePreviewUrl) ? <img src={imagePreviewUrl} alt="prev"/> : <div className="previewText">"Add Photo"</div>
+    let $imagePreview = (imagePreviewUrl) ? <img src={imagePreviewUrl} alt="prev" /> : <div className="previewText">"Add Photo"</div>
     console.log('prev', this.state.imagePreviewUrl)
 
     return (
@@ -58,24 +64,24 @@ class BasicInfoCourse extends Component {
         <form >
           <div className="form-row">
             <div className="form-group col-md-5">
-              <input type="text" className="form-control" name="name" placeholder="Course Name" 
+              <input type="text" className="form-control" name="name" placeholder="Course Name"
                 value={this.state.name} onChange={this.handleChange} required />
             </div>
             <div className="form-group col-md-4">
-              <input type="number" className="form-control" name="duration" placeholder="Course Duration" 
+              <input type="number" className="form-control" name="duration" placeholder="Course Duration"
                 value={this.state.duration} onChange={this.handleChange} required />
             </div>
             <p className='duration'>Minutes</p>
           </div>
           <div className="form-row">
             <div className="form-group col-md-10">
-              <textarea className="form-control" name="description" rows={3} placeholder="Course Description" 
+              <textarea className="form-control" name="description" rows={3} placeholder="Course Description"
                 value={this.state.description} onChange={this.handleChange} />
             </div>
           </div>
           <div className="form-row">
             <div className="form-group col-md-9">
-              <input type="number" className="form-control" name="price" placeholder="Course Price" 
+              <input type="number" className="form-control" name="price" placeholder="Course Price"
                 value={this.state.price} onChange={this.handleChange} required />
             </div>
             <p className='price'>DT</p>
@@ -98,17 +104,15 @@ class BasicInfoCourse extends Component {
   }
 }
 
-const mapDispatchToProps=(dispatch)=>
-{
-    return {
-        addCourseReducer:corse=>
-        {
-            dispatch({
-                type:'ADD_CORSE',
-                corse
-            })
-        }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addCourseReducer: corse => {
+      dispatch({
+        type: 'ADD_CORSE',
+        corse
+      })
     }
+  }
 }
- 
-export default connect(null,mapDispatchToProps)(BasicInfoCourse);
+
+export default connect(null, mapDispatchToProps)(BasicInfoCourse);
