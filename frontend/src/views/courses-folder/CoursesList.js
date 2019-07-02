@@ -16,9 +16,16 @@ class CourseList extends Component {
     axios.get('/corses').then((res) => this.props.initCoursesReducer(res.data))
   }
   render() {
-    return (<>
-      <div className="content">
-        <BrowserRouter>
+    return (
+      <>
+        <div className="content"><BrowserRouter>
+          <Row>
+            <Col md="12">
+              <Card>
+                <button type="submit" className="btn btn-success add-course-btn">Add Course+</button>
+              </Card>
+            </Col>
+          </Row>
           <Row>
             <Col md="12">
               <Card>
@@ -34,12 +41,12 @@ class CourseList extends Component {
                 </CardHeader>
               </Card>
             </Col>
-          </Row>
+          </Row >
           <hr />
           <Route exact path={`/courses/profile/:id`} render={() => (<OneCourse course={this.props.match.params.id} />)} />
-        </BrowserRouter>
-      </div>
-    </>);
+        </BrowserRouter >
+        </div >
+      </>);
   }
 }
 

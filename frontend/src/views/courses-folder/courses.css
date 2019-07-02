@@ -17,3 +17,29 @@
 .nav-pills .nav-link{
     margin-top: 2rem;
 }
+/* course */
+.profile-titre{
+    color: #747474;
+    font-weight: bold;
+}
+.social{
+    font-size: 1.5rem;
+    padding-left: 3rem; 
+}
+.social-titre{
+    color: #747474;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+.btn-round{
+    padding-right: 2rem;
+}
+.title{
+    margin-top: 1.5rem;
+    font-size:2rem;
+}
+
+.add-course-btn{
+    margin-left: 5rem;
+    margin-right: 5rem;
+  }
