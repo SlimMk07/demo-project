@@ -2,13 +2,13 @@ import Dashboard from "views/Dashboard.jsx";
 import Calendar from "views/Calendar.jsx";
 import Teacher from "views/teachers-folder/teacher";
 import Student from "views/students-folder/student";
-import Course from "views/courses-folder/course";
+import Course from "views/courses-folder/AddCourse";
 import TeacherList from "views/teachers-folder/teachers-list";
 import StudentList from "views/students-folder/students-list";
-import CourseList from "views/courses-folder/courses-list";
+import CourseList from "views/courses-folder/CoursesList";
 import StudentProfile from "views/students-folder/students-profile.jsx";
 import TeacherProfile from "views/teachers-folder/teachers-profile.jsx";
-import CourseInfo from "views/courses-folder/courses-info.jsx";
+import CourseInfo from "views/courses-folder/CoursesInfo.jsx";
 
 var routes = [
   {
@@ -33,16 +33,14 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/profprofile",
+    path: "/professors/profile/:id",
     name: "Professors profile",
-    icon: "",
     component: TeacherProfile,
     layout: "/admin"
   },
   {
-    path: "/addprofs",
+    path: "/professors/add",
     name: "Add Professor",
-    icon: "",
     component: Teacher,
     layout: "/admin"
   },
@@ -54,16 +52,14 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/studprofile",
+    path: "/students/profile/:id",
     name: "Students profile",
-    icon: "",
     component: StudentProfile,
     layout: "/admin"
   },
   {
-    path: "/addstud",
+    path: "/students/add",
     name: "Add Student",
-    icon: "",
     component: Student,
     layout: "/admin"
   },
@@ -75,14 +71,14 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/courseinfo",
+    path: "/courses/profile/:id",
     name: "course informations",
     icon: "",
     component: CourseInfo,
     layout: "/admin"
   },
   {
-    path: "/addcourses",
+    path: "/courses/add",
     name: "Add Courses",
     icon: "",
     component: Course,

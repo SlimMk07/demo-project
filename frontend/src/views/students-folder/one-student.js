@@ -8,7 +8,7 @@ function OneStudent(props) {
     studentsHtml = student.map((student, i) =>
         <div key={i} className="card-deck one-student">
             <div className="card">
-                <img src={student.image} className="card-img-top" alt="image" />
+                <img src={student.image} className="card-img-top" alt="pic" />
                 <div className="card-body">
                     <h5 className="card-title students-name">{student.name}</h5>
                     {student.button}

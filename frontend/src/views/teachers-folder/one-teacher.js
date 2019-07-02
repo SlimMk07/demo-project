@@ -8,7 +8,7 @@ function OneTeacher(props) {
     teachersHtml = teacher.map((teacher, i) =>
         <div key={i} className="card-deck one-teacher">
             <div className="card">
-                <img src={teacher.image} className="card-img-top" alt="image" />
+                <img src={teacher.image} className="card-img-top" alt="pic" />
                 <div className="card-body">
                     <h5 className="card-title teachers-name">{teacher.name}</h5>
                     {teacher.button}

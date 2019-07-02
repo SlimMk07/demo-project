@@ -23,7 +23,7 @@ class CalendarFull extends React.Component {
       /** modal */
       add: false,
       /** to add a class */
-      class: 'class',
+      class: '',
       course: "Science",
       professor: 'Titi',
       start: moment(new Date()).format('YYYY-MM-DDTHH:mm'),

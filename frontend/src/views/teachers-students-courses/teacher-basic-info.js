@@ -19,25 +19,20 @@ import {
 class BasicInfo extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-
-        }
+        this.state = {}
     }
     saveInfos = (e) => {
 
         if (e.target.name === 'img')
             this.setState({ image: URL.createObjectURL(e.target.files[0]) })
-
-
     }
 
     render() {
         return (
             <div>
                 <form >
-                    <div class="form-row">
+                    <div className="form-row">
                         <div className="form-group col-md-4">
-
                             <input type="text" className="form-control" id="inputName" placeholder="Full Name" required />
                         </div>
                         <div className="form-group col-md-3">
@@ -45,14 +40,12 @@ class BasicInfo extends Component {
                         </div>
                         <div className="form-group col-md-3">
                             <select id="inputState" className="form-control" required >
-                                <option>Select Gender</option>
-
-                                <option>Male</option>
-                                <option>Female</option>
+                                <option value='0'>Male</option>
+                                <option value='1'>Female</option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div className="form-row">
                         <div className="form-group col-md-10">
                             <label >Teaching :</label>
                             <select multiple className="form-control" id="exampleFormControlSelect2" required>
@@ -80,12 +73,11 @@ class BasicInfo extends Component {
                         </div>
                     </div>
                     <div className="form-row">
-                    <div className="form-group col-md-6">
-                            <select id="inputState" className="form-control"  >
-                                <option selected>Select City</option>
-                                <option>Tunis</option>
-                                <option>Sousse</option>
-                                <option>Sfax</option>
+                        <div className="form-group col-md-6">
+                            <select id="inputState" className="form-control" defaultValue="Tunis" >
+                                <option value="Tunis">Tunis</option>
+                                <option value="Sousse">Sousse</option>
+                                <option value="Sfax">Sfax</option>
                             </select>
                         </div>
                         <div className="form-group col-md-4">
