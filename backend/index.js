@@ -85,9 +85,7 @@ MongoClient.connect(mongourl, { useNewUrlParser: true }, (err, client) => {
   /** corses managing */
   app.post('/add_corse', (req, res) => {
     console.log(req.body)
-    let new_product = req.body
-    //new_product.picture = Binary(req.body.picture)
-    db.collection('corses').insertOne(new_product, (err, data) => {
+    db.collection('corses').insertOne(req.body, (err, data) => {
       if (err) res.send(err)
       else res.send(data)
     })
