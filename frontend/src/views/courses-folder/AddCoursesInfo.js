@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'views/courses-folder/courses.css'
-
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
 import axios from 'axios'
 
@@ -8,7 +8,7 @@ class BasicInfoCourse extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      file: '', imagePreviewUrl: null, name: null, duration: null, description: null, price: null
+      file: null, imagePreviewUrl: null, name: null, duration: null, description: null, price: null
     }
   }
   saveInfos = (e) => {
@@ -42,16 +42,17 @@ class BasicInfoCourse extends Component {
   addCourse = () => {
     if (!(this.state.imagePreviewUrl != null || this.state.name != null || this.state.duration != null ||
       this.state.description != null || this.state.price != null))
-      axios.post('/add_corse', {
-        picture: this.state.imagePreviewUrl, name: this.state.name,
-        duration: this.state.duration, description: this.state.description, price: this.state.price
-      })
-        .then(() => this.props.addCourseReducer({
-          picture: this.state.imagePreviewUrl, name: this.state.name,
-          duration: this.state.duration, description: this.state.description, price: this.state.price
-        }))
-        .then(()=>this.props.history.push('/courses'))
-        .catch((err) => alert(err))
+      console.log('add course')
+    axios.post('/add_corse', {
+      picture: this.state.imagePreviewUrl, name: this.state.name,
+      duration: this.state.duration, description: this.state.description, price: this.state.price
+    })
+    .then(() => this.props.addCourseReducer({
+      picture: this.state.imagePreviewUrl, name: this.state.name,
+      duration: this.state.duration, description: this.state.description, price: this.state.price
+    }))
+    .catch((err) => alert(err))
+    this.props.history.push('/courses')
   }
 
   render() {
@@ -60,7 +61,7 @@ class BasicInfoCourse extends Component {
     console.log('prev', this.state.imagePreviewUrl)
 
     return (
-      <div>
+      <div >
         <form >
           <div className="form-row">
             <div className="form-group col-md-5">
@@ -97,7 +98,7 @@ class BasicInfoCourse extends Component {
               </div>
             </div>
           </div>
-          <center><button type="submit" className="btn btn-primary" onClick={this.addCourse}>Save</button></center>
+          <center><button className="btn btn-primary" onClick={this.addCourse}>Save</button></center>
         </form>
       </div>
     );
@@ -115,4 +116,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(BasicInfoCourse);
+export default withRouter(connect(null, mapDispatchToProps)(BasicInfoCourse));

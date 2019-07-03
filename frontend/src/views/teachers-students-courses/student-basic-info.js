@@ -89,7 +89,7 @@ class BasicInfo2 extends Component {
                         </FormGroup>
                       </Col>
                     </Row>
-                    <div class="form-row">
+                    <div className="form-row">
                         <div className="form-group col-md-2">
                             <ImageUpload />
                         </div>

@@ -7,6 +7,14 @@ import DemoNavbar from "components/Navbars/DemoNavbar.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import Sidebar from "components/Sidebar/Sidebar.jsx";
 
+import Teacher from "views/teachers-folder/teacher";
+import Student from "views/students-folder/student";
+import Course from "views/courses-folder/AddCourse"
+import TeacherProfile from "views/teachers-folder/teachers-profile.jsx";
+import CourseInfo from "views/courses-folder/CourseInfo.jsx";
+
+
+
 import routes from "routes.js";
 
 var ps;
@@ -65,6 +73,12 @@ class Dashboard extends React.Component {
                 />
               );
             })}
+            <Route exact path="/admin/professors/add" component={Teacher} />
+            <Route exact path="/admin/students/add" component={Student} />
+            <Route exact path="/admin/courses/add" component={Course} />
+            <Route exact path="/admin/professors/profile/:id" component={TeacherProfile} />
+            <Route exact path="/admin/students/profile/:id" component={Teacher} />
+            <Route exact path="/admin/course/profile/:id" component={CourseInfo} />
           </Switch>
           <Footer fluid />
         </div>

@@ -75,7 +75,7 @@ class TeacherProfile extends React.Component {
                           outline
                           size="sm"
                         >
-                          <i class="fab fa-google"></i>
+                          <i className="fab fa-google"></i>
                         </Button>
                       </Col>
                       <Col className="mr-auto" lg="3" md="6" xs="6">
@@ -107,7 +107,7 @@ class TeacherProfile extends React.Component {
                   <Form>
                     <div>
                       <form >
-                        <div class="form-row">
+                        <div className="form-row">
                           <div className="form-group col-md-4">
                             <input type="text" className="form-control" id="inputName" placeholder="Full Name" required disabled />
                           </div>
@@ -118,7 +118,7 @@ class TeacherProfile extends React.Component {
                             <input type="text" className="form-control" id="inputGendre" placeholder="Gendre" required disabled />
                           </div>
                         </div>
-                        <div class="form-row">
+                        <div className="form-row">
                           <div className="form-group col-md-10">
                             <input type="text" className="form-control" id="inputCourse" placeholder="Course" required disabled />
                           </div>

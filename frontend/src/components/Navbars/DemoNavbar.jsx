@@ -62,6 +62,7 @@ class Header extends React.Component {
       }
       return null;
     });
+    console.log('brand', brandName)
     return brandName;
   }
   openSidebar() {
