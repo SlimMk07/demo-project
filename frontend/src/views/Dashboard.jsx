@@ -27,8 +27,8 @@ class Dashboard extends React.Component {
                     </Col>
                     <Col md="8" xs="7">
                       <div className="numbers">
-                        <p className="card-category">Capacity</p>
-                        <CardTitle tag="p">150GB</CardTitle>
+                        <p className="card-category">Students Number</p>
+                        <CardTitle tag="p">150K</CardTitle>
                         <p />
                       </div>
                     </Col>
@@ -53,8 +53,8 @@ class Dashboard extends React.Component {
                     </Col>
                     <Col md="8" xs="7">
                       <div className="numbers">
-                        <p className="card-category">Revenue</p>
-                        <CardTitle tag="p">$ 1,345</CardTitle>
+                        <p className="card-category">Teachers Number</p>
+                        <CardTitle tag="p">1000</CardTitle>
                         <p />
                       </div>
                     </Col>
@@ -79,8 +79,8 @@ class Dashboard extends React.Component {
                     </Col>
                     <Col md="8" xs="7">
                       <div className="numbers">
-                        <p className="card-category">Errors</p>
-                        <CardTitle tag="p">23</CardTitle>
+                        <p className="card-category">Classes Number</p>
+                        <CardTitle tag="p">15k</CardTitle>
                         <p />
                       </div>
                     </Col>
@@ -105,7 +105,7 @@ class Dashboard extends React.Component {
                     </Col>
                     <Col md="8" xs="7">
                       <div className="numbers">
-                        <p className="card-category">Followers</p>
+                        <p className="card-category">Courses Number</p>
                         <CardTitle tag="p">+45K</CardTitle>
                         <p />
                       </div>
@@ -125,8 +125,8 @@ class Dashboard extends React.Component {
             <Col md="12">
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h5">Users Behavior</CardTitle>
-                  <p className="card-category">24 Hours performance</p>
+                  <CardTitle tag="h5">Inscriptions every session</CardTitle>
+                  <p className="card-category">Inscriptions</p>
                 </CardHeader>
                 <CardBody>
                   <Line
@@ -137,12 +137,6 @@ class Dashboard extends React.Component {
                     height={100}
                   />
                 </CardBody>
-                <CardFooter>
-                  <hr />
-                  <div className="stats">
-                    <i className="fa fa-history" /> Updated 3 minutes ago
-                  </div>
-                </CardFooter>
               </Card>
             </Col>
           </Row>
@@ -150,8 +144,7 @@ class Dashboard extends React.Component {
             <Col md="4">
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h5">Email Statistics</CardTitle>
-                  <p className="card-category">Last Campaign Performance</p>
+                  <CardTitle tag="h5">courses inscriptions Statistics</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Pie
@@ -165,10 +158,6 @@ class Dashboard extends React.Component {
                     <i className="fa fa-circle text-warning" /> Read{" "}
                     <i className="fa fa-circle text-danger" /> Deleted{" "}
                     <i className="fa fa-circle text-gray" /> Unopened
-                  </div>
-                  <hr />
-                  <div className="stats">
-                    <i className="fa fa-calendar" /> Number of emails sent
                   </div>
                 </CardFooter>
               </Card>
@@ -192,10 +181,6 @@ class Dashboard extends React.Component {
                   <div className="chart-legend">
                     <i className="fa fa-circle text-info" /> Tesla Model S{" "}
                     <i className="fa fa-circle text-warning" /> BMW 5 Series
-                  </div>
-                  <hr />
-                  <div className="card-stats">
-                    <i className="fa fa-check" /> Data information certified
                   </div>
                 </CardFooter>
               </Card>
