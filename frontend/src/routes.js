@@ -1,8 +1,9 @@
 import Dashboard from "views/Dashboard.jsx";
 import Calendar from "views/Calendar.jsx";
-import TeacherList from "views/teachers-folder/teachers-list";
-import StudentList from "views/students-folder/students-list";
-import CourseList from "views/courses-folder/CoursesList";
+import TeacherList from "views/teachers/TeachersList";
+import StudentList from "views/students/students-list";
+import CourseList from "views/courses/CoursesList";
+
 var routes = [
   {
     path: "/dashboard",
@@ -40,4 +41,5 @@ var routes = [
     layout: "/admin"
   }
 ];
+
 export default routes;

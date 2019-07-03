@@ -7,11 +7,11 @@ import DemoNavbar from "components/Navbars/DemoNavbar.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import Sidebar from "components/Sidebar/Sidebar.jsx";
 
-import Teacher from "views/teachers-folder/teacher";
-import Student from "views/students-folder/student";
-import Course from "views/courses-folder/AddCourse"
-import TeacherProfile from "views/teachers-folder/teachers-profile.jsx";
-import CourseInfo from "views/courses-folder/CourseInfo.jsx";
+import Teacher from "views/teachers/teacher";
+import Student from "views/students/Student";
+import Course from "views/courses/AddCourse"
+import TeacherProfile from "views/teachers/teachers-profile.jsx";
+import CourseInfo from "views/courses/CourseInfo.jsx";
 
 
 

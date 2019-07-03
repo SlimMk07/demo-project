@@ -1,5 +1,5 @@
 import React from "react";
-import './courses.css'
+import './../../assets/css/courses.css'
 
 import { connect } from 'react-redux'
 

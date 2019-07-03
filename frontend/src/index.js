@@ -13,10 +13,10 @@ import AdminLayout from "layouts/Admin.jsx";
 import {Provider} from 'react-redux';
 import {createStore } from 'redux'
 
-import CourseInfo from './views/courses-folder/CourseInfo'
+import CourseInfo from './views/courses/CourseInfo'
 
 import './index.css';
-import reducer from './reducers'
+import reducer from './reducers' 
 
 
 const hist = createBrowserHistory();

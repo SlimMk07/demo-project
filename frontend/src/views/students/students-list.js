@@ -1,31 +1,31 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import { Card, CardHeader, Row, Col } from "reactstrap";
+import OneStudent from './OneStudent';
+import './../../assets/css/students.css'
 import { NavLink, Switch, Route } from "react-router-dom";
-import CourseInfo from './CourseInfo'
-import OneCourse from './OneCourse';
+import Student from './Student'
 
 import { connect } from 'react-redux'
 import axios from 'axios'
 
-class CourseList extends Component {
+class StudentList extends Component {
   constructor(props) {
     super(props);
     this.state = {}
   }
+
   componentDidMount = () => {
     axios.get('/corses').then((res) => this.props.initCoursesReducer(res.data))
   }
+
   render() {
-    console.log('list of corses', this.props.corse)
     return (
       <>
-        <div className="content" key={this.props.location.pathname}>
+        <div className="content">
           <Row>
             <Col md="12">
               <Card>
-                <NavLink to={"/admin/courses/add"} >
-                  <button type="submit" className="btn btn-success add-course-btn">Add Course+</button>
-                </NavLink>
+                <button type="submit" className="btn btn-success add-student-btn">Add Student+</button>
               </Card>
             </Col>
           </Row>
@@ -33,8 +33,8 @@ class CourseList extends Component {
             <Col md="12">
               <Card>
                 <CardHeader>
-                  <div className='courses-list'>
-                    <div className='row courses'>
+                  <div className='students-list'>
+                    <div className='row students'>
                       {this.props.corse.map((course, i) =>
                         <NavLink key={i}
                           to={{
@@ -42,7 +42,7 @@ class CourseList extends Component {
                             course: this.props.corse.filter(el => el._id === course._id)[0]
                           }}
                         >
-                          <OneCourse key={i} course={course} />
+                          <OneStudent key={i} course={course} />
                         </NavLink>
                       )}
                     </div>
@@ -50,13 +50,14 @@ class CourseList extends Component {
                 </CardHeader>
               </Card>
             </Col>
-          </Row >
+          </Row>
           <Switch>
             <Route exact path='/admin/course/profile/:id' render={(props) =>
-              <CourseInfo course={this.props.corse.filter(el => el._id === props.match.params.id)[0]} _id={props.match.params.id} />} />
+              <Student course={this.props.corse.filter(el => el._id === props.match.params.id)[0]} _id={props.match.params.id} />} />
           </Switch>
-        </div >
-      </>);
+        </div>
+      </>
+    );
   }
 }
 
@@ -76,4 +77,5 @@ const mapDispatchToProps = (dispatch) => {
     }
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(CourseList);
+
+export default connect(mapStateToProps, mapDispatchToProps)(StudentList);

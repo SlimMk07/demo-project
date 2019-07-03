@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
-import './course-list.css'
+import './../../assets/css/course-list.css'
 
 class OneCourse extends Component {
   constructor(props) {
     super(props);
     this.state = {}
   }
+
   render() {
     return (
       <div className="card-deck one-course" >
@@ -13,7 +14,6 @@ class OneCourse extends Component {
           <img src={this.props.course.picture} className="card-img-top" alt="pic" />
           <div className="card-body">
             <h5 className="card-title courses-name">{this.props.course.name}</h5>
-            {/* {course.button} */}
           </div>
         </div>
       </div>);

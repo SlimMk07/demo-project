@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './teachers.css'
-import BasicInfo from 'views/teachers-students-courses/teacher-basic-info'
-import SocialInfo from 'views/teachers-students-courses/teacher-social-info'
+import './../../assets/css/students.css'
+import BasicInfo from 'views/students/StudentInfo'
+import SocialInfo from 'views/teachers/teacher-social-info'
 import { Card, CardHeader, Row, Col } from "reactstrap";
 
-class Teacher extends Component {
+class Student extends Component {
   constructor(props) {
     super(props);
     this.state = {}
@@ -46,4 +46,4 @@ class Teacher extends Component {
   }
 }
 
-export default Teacher;
+export default Student;

@@ -1,5 +1,5 @@
 import React from 'react'
-import './student-list.css'
+import './../../assets/css/student-list.css'
 
 function OneStudent(props) {
     const student = props.student

@@ -5,13 +5,23 @@ import { Line, Pie } from "react-chartjs-2";
 import {Card, CardHeader, CardBody, CardFooter, CardTitle, Row, Col} from "reactstrap";
 // core components
 import {dashboard24HoursPerformanceChart, dashboardEmailStatisticsChart, dashboardNASDAQChart} from "variables/charts.jsx";
+import { connect } from 'react-redux'
+import axios from 'axios'
 
 
 
 class Dashboard extends React.Component {
   datasetKeyProvider(){ return Math.random(); } 
 
+  componentDidMount(){
+    axios.get('/professors').then((res) => this.props.initProfessorsReducer(res.data))
+    axios.get('/corses').then((res) => this.props.initCoursesReducer(res.data))
+    axios.get('/students').then((res) => this.props.initStudentsReducer(res.data))
+    axios.get('/classes').then((res) => this.props.initClassesReducer(res.data))
+  }
+
   render() {
+   console.log (this.props.students)
     return (
       <>
         <div className="content"> 
@@ -27,8 +37,8 @@ class Dashboard extends React.Component {
                     </Col>
                     <Col md="8" xs="7">
                       <div className="numbers">
-                        <p className="card-category">Capacity</p>
-                        <CardTitle tag="p">150GB</CardTitle>
+                        <p className="card-category">Students Number</p>
+                        <CardTitle tag="p">{this.props.students.length}</CardTitle>
                         <p />
                       </div>
                     </Col>
@@ -53,8 +63,8 @@ class Dashboard extends React.Component {
                     </Col>
                     <Col md="8" xs="7">
                       <div className="numbers">
-                        <p className="card-category">Revenue</p>
-                        <CardTitle tag="p">$ 1,345</CardTitle>
+                        <p className="card-category">Teachers Number</p>
+                        <CardTitle tag="p">{this.props.classes.length}</CardTitle>
                         <p />
                       </div>
                     </Col>
@@ -79,8 +89,8 @@ class Dashboard extends React.Component {
                     </Col>
                     <Col md="8" xs="7">
                       <div className="numbers">
-                        <p className="card-category">Errors</p>
-                        <CardTitle tag="p">23</CardTitle>
+                        <p className="card-category">Classes Number</p>
+                        <CardTitle tag="p">{this.props.classes.length}</CardTitle>
                         <p />
                       </div>
                     </Col>
@@ -105,8 +115,8 @@ class Dashboard extends React.Component {
                     </Col>
                     <Col md="8" xs="7">
                       <div className="numbers">
-                        <p className="card-category">Followers</p>
-                        <CardTitle tag="p">+45K</CardTitle>
+                        <p className="card-category">Courses Number</p>
+                        <CardTitle tag="p">{this.props.corses.length}</CardTitle>
                         <p />
                       </div>
                     </Col>
@@ -125,8 +135,8 @@ class Dashboard extends React.Component {
             <Col md="12">
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h5">Users Behavior</CardTitle>
-                  <p className="card-category">24 Hours performance</p>
+                  <CardTitle tag="h5">Inscriptions every session</CardTitle>
+                  <p className="card-category">Inscriptions</p>
                 </CardHeader>
                 <CardBody>
                   <Line
@@ -137,12 +147,6 @@ class Dashboard extends React.Component {
                     height={100}
                   />
                 </CardBody>
-                <CardFooter>
-                  <hr />
-                  <div className="stats">
-                    <i className="fa fa-history" /> Updated 3 minutes ago
-                  </div>
-                </CardFooter>
               </Card>
             </Col>
           </Row>
@@ -150,8 +154,7 @@ class Dashboard extends React.Component {
             <Col md="4">
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h5">Email Statistics</CardTitle>
-                  <p className="card-category">Last Campaign Performance</p>
+                  <CardTitle tag="h5">courses inscriptions Statistics</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Pie
@@ -165,10 +168,6 @@ class Dashboard extends React.Component {
                     <i className="fa fa-circle text-warning" /> Read{" "}
                     <i className="fa fa-circle text-danger" /> Deleted{" "}
                     <i className="fa fa-circle text-gray" /> Unopened
-                  </div>
-                  <hr />
-                  <div className="stats">
-                    <i className="fa fa-calendar" /> Number of emails sent
                   </div>
                 </CardFooter>
               </Card>
@@ -190,12 +189,7 @@ class Dashboard extends React.Component {
                 </CardBody>
                 <CardFooter>
                   <div className="chart-legend">
-                    <i className="fa fa-circle text-info" /> Tesla Model S{" "}
                     <i className="fa fa-circle text-warning" /> BMW 5 Series
-                  </div>
-                  <hr />
-                  <div className="card-stats">
-                    <i className="fa fa-check" /> Data information certified
                   </div>
                 </CardFooter>
               </Card>
@@ -207,5 +201,43 @@ class Dashboard extends React.Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    initProfessorsReducer: profs => {
+      dispatch({
+        type: 'INIT_PROFS',
+        profs
+      })
+    },
+    initCoursesReducer: corses => {
+      dispatch({
+        type: 'INIT_CORSES',
+        corses
+      })
+    },
+    initStudentsReducer: students => {
+      dispatch({
+        type: 'INIT_STUDS',
+        students
+      })
+    },
+    initClassesReducer: classes => {
+      dispatch({
+        type: 'INIT_CLASSES',
+        classes
+      })
+    }
+    
+  }
+}
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+  return {
+    profs: state.profs,
+    corses: state.corses,
+    students: state.students,
+    classes: state.classes
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

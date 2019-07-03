@@ -1,5 +1,5 @@
 import React from "react";
-import './student-list.css'
+import './../../assets/css/teacher-list.css'
 // reactstrap components
 import {
   Button,
@@ -15,7 +15,7 @@ import {
   Col
 } from "reactstrap";
 
-class StudentProfile extends React.Component {
+class TeacherProfile extends React.Component {
   render() {
     return (
       <>
@@ -169,4 +169,4 @@ class StudentProfile extends React.Component {
   }
 }
 
-export default StudentProfile;
+export default TeacherProfile;

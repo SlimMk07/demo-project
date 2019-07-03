@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import 'views/courses-folder/courses.css'
+import './../../assets/css/courses.css'
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
 import axios from 'axios'
@@ -58,7 +58,6 @@ class BasicInfoCourse extends Component {
   render() {
     let { imagePreviewUrl } = this.state;
     let $imagePreview = (imagePreviewUrl) ? <img src={imagePreviewUrl} alt="prev" /> : <div className="previewText">"Add Photo"</div>
-    console.log('prev', this.state.imagePreviewUrl)
 
     return (
       <div >
