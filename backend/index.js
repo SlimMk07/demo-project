@@ -58,7 +58,7 @@ MongoClient.connect(mongourl, { useNewUrlParser: true }, (err, client) => {
     })
   })
 
-  app.get('/student/', (req, res) => {
+  app.get('/students/', (req, res) => {
     db.collection('student').find().toArray((err, data) => {
       if (err) res.send("error")
       else res.send(data)
