@@ -8,7 +8,7 @@ class BasicInfoCourse extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      file: null, imagePreviewUrl: null, name: null, duration: null, description: null, price: null
+      file: '', imagePreviewUrl: '', name: '', duration: '', description: '', price: ''
     }
   }
   saveInfos = (e) => {
@@ -40,8 +40,8 @@ class BasicInfoCourse extends Component {
   }
 
   addCourse = () => {
-    if (!(this.state.imagePreviewUrl != null || this.state.name != null || this.state.duration != null ||
-      this.state.description != null || this.state.price != null))
+    if (!this.state.imagePreviewUrl || !this.state.name || !this.state.duration ||
+      !this.state.description || !this.state.price)
       console.log('add course')
     axios.post('/add_corse', {
       picture: this.state.imagePreviewUrl, name: this.state.name,
@@ -52,7 +52,7 @@ class BasicInfoCourse extends Component {
       duration: this.state.duration, description: this.state.description, price: this.state.price
     }))
     .catch((err) => alert(err))
-    this.props.history.push('/courses')
+    this.props.history.push('/admin/courses')
   }
 
   render() {
