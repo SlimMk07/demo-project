@@ -14,14 +14,14 @@ class Dashboard extends React.Component {
   datasetKeyProvider(){ return Math.random(); } 
 
   componentDidMount(){
-    axios.get('/professors').then((res) => this.props.initProfessorsReducer(res.data))
     axios.get('/corses').then((res) => this.props.initCoursesReducer(res.data))
     axios.get('/students').then((res) => this.props.initStudentsReducer(res.data))
     axios.get('/classes').then((res) => this.props.initClassesReducer(res.data))
+    axios.get('/professors').then((res) => this.props.initProfessorsReducer(res.data))
   }
 
   render() {
-   console.log (this.props.students)
+   console.log ('props', this.props)
     return (
       <>
         <div className="content"> 
@@ -47,7 +47,7 @@ class Dashboard extends React.Component {
                 <CardFooter>
                   <hr />
                   <div className="stats">
-                    <i className="fas fa-sync-alt" /> Update Now
+                  <a href='/admin/dashboard'><i className="fas fa-sync-alt" /> Update now</a>
                   </div>
                 </CardFooter>
               </Card>
@@ -64,7 +64,7 @@ class Dashboard extends React.Component {
                     <Col md="8" xs="7">
                       <div className="numbers">
                         <p className="card-category">Teachers Number</p>
-                        <CardTitle tag="p">{this.props.classes.length}</CardTitle>
+                        {/* <CardTitle tag="p">{this.props}</CardTitle> */}
                         <p />
                       </div>
                     </Col>
@@ -73,7 +73,7 @@ class Dashboard extends React.Component {
                 <CardFooter>
                   <hr />
                   <div className="stats">
-                    <i className="far fa-calendar" /> Last day
+                  <a href='/admin/dashboard'><i className="fas fa-sync-alt" /> Update now</a>
                   </div>
                 </CardFooter>
               </Card>
@@ -99,7 +99,7 @@ class Dashboard extends React.Component {
                 <CardFooter>
                   <hr />
                   <div className="stats">
-                    <i className="far fa-clock" /> In the last hour
+                  <a href='/admin/dashboard'><i className="fas fa-sync-alt" /> Update now</a>
                   </div>
                 </CardFooter>
               </Card>
@@ -125,7 +125,7 @@ class Dashboard extends React.Component {
                 <CardFooter>
                   <hr />
                   <div className="stats">
-                    <i className="fas fa-sync-alt" /> Update now
+                    <a href='/admin/dashboard'><i className="fas fa-sync-alt" /> Update now</a>
                   </div>
                 </CardFooter>
               </Card>
@@ -203,12 +203,6 @@ class Dashboard extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    initProfessorsReducer: profs => {
-      dispatch({
-        type: 'INIT_PROFS',
-        profs
-      })
-    },
     initCoursesReducer: corses => {
       dispatch({
         type: 'INIT_CORSES',
@@ -226,17 +220,22 @@ const mapDispatchToProps = (dispatch) => {
         type: 'INIT_CLASSES',
         classes
       })
+    },
+    initProfessorsReducer: profs => {
+      dispatch({
+        type: 'INIT_PROFS',
+        profs
+      })
     }
-    
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    profs: state.profs,
     corses: state.corses,
     students: state.students,
-    classes: state.classes
+    classes: state.classes,
+    profs: state.profs
   }
 }
 

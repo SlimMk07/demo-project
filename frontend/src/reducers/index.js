@@ -7,5 +7,4 @@ import students from './students'
 import user from './user'
 
 
-
-export default combineReducers({classes, corses, professors, students, user})
+export default combineReducers({classes, corses, students, user, professors})

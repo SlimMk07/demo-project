@@ -25,6 +25,7 @@ MongoClient.connect(mongourl, { useNewUrlParser: true }, (err, client) => {
   })
 
   app.get('/professors', (req, res) => {
+    console.log('prof inside backend')
     db.collection('prof').find().toArray((err, data) => {
       if (err) res.send("error")
       else res.send(data)
@@ -59,6 +60,7 @@ MongoClient.connect(mongourl, { useNewUrlParser: true }, (err, client) => {
   })
 
   app.get('/students/', (req, res) => {
+    console.log('students inside backend')
     db.collection('student').find().toArray((err, data) => {
       if (err) res.send("error")
       else res.send(data)

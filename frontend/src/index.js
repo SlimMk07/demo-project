@@ -13,8 +13,6 @@ import AdminLayout from "layouts/Admin.jsx";
 import {Provider} from 'react-redux';
 import {createStore } from 'redux'
 
-import CourseInfo from './views/courses/CourseInfo'
-
 import './index.css';
 import reducer from './reducers' 
 
@@ -26,10 +24,8 @@ const store=createStore(reducer)
 ReactDOM.render(
   <Provider store={store}>
     <Router history={hist}>
-      <Route exact path='/admin/courses/profile' render={(props) => <CourseInfo />} />  
       <Switch>
         <Route exact path="/" component={Login} />
-        {/* <Route exact path='/admin/courses/profile/:id' render={(props) => <CourseInfo _id={props.match.params.id} />} />   */}
         <Route path="/admin" render={props => <AdminLayout {...props} />} />  
         <Redirect to="/admin/dashboard" />
       </Switch>

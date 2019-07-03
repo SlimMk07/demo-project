@@ -3,6 +3,7 @@ import { Card, CardHeader, Row, Col } from "reactstrap";
 import { NavLink, Switch, Route } from "react-router-dom";
 import OneTeacher from './OneTeacher';
 import './../../assets/css/teachers.css'
+import Teacher from './teacher'
 
 import { connect } from 'react-redux'
 import axios from 'axios'
@@ -49,10 +50,10 @@ class TeacherList extends Component {
               </Card>
             </Col>
           </Row>
-          {/* <Switch>
+          <Switch>
             <Route exact path='/admin/professors/profile/:id' render={(props) =>
-              <CourseInfo course={this.props.profs.filter(el => el._id === props.match.params.id)[0]} _id={props.match.params.id} />} />
-          </Switch> */}
+              <Teacher course={this.props.profs.filter(el => el._id === props.match.params.id)[0]} _id={props.match.params.id} />} />
+          </Switch>
         </div>
       </>
     );
@@ -69,7 +70,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     initProfsReducer: profs => {
       dispatch({
-        type: 'INIT_PROFS',
+        type: 'INIT_PROFFS',
         profs
       })
     }
