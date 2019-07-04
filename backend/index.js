@@ -108,6 +108,34 @@ MongoClient.connect(mongourl, { useNewUrlParser: true }, (err, client) => {
     })
   })
 
+  app.get('/inscription', (req, res) => {
+    const date ="2019-07-02"
+    db.collection('classes').countDocuments({start:{$regex : "2019-07-28"}}, {}, (err, data1) => {
+      if (err) res.send("error")
+      else  {
+        db.collection('classes').countDocuments({start:{$regex : "2019-06-29"}}, {}, (err, data2) => {
+          if (err) res.send("error")
+          else  {
+            db.collection('classes').countDocuments({start:{$regex : "2019-06-30"}}, {}, (err, data3) => {
+              if (err) res.send("error")
+              else {
+                db.collection('classes').countDocuments({start:{$regex : "2019-07-01"}}, {}, (err, data4) => {
+                  if (err) res.send("error")
+                  else  {
+                    db.collection('classes').countDocuments({start:{$regex : "2019-07-02"}}, {}, (err, data5) => {
+                      if (err) res.send("error")
+                      else  res.send([["2019-07-02",  "2019-07-01", "2019-06-30","2019-06-29", "2019-06-28"], [data5, data4, data3, data2, data1] ])
+                    });
+                  }
+                });
+              }
+            });
+          }
+        });
+      }
+    });
+  })
+
   app.put('/update_corse/:id', bodyParser.json(), (req, res) => {
     let ID = ObjectID(req.params.id)
     let modifiedContact = req.body

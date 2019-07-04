@@ -2,29 +2,22 @@ const dashboard24HoursPerformanceChart = {
   data: canvas => {
     return {
       labels: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec"
+        "2019-07-02",
+        "2019-07-01",
+        "2019-06-30",
+        "2019-06-29",
+        "2019-06-28"
       ],
       datasets: [
         {
-          borderColor: "#5FFBF1",
+          borderColor: "red",
           backgroundColor: "#5FFBF1",
           pointRadius: 0,
           pointHoverRadius: 0,
           borderWidth: 3,
           data: [300, 310, 316, 322, 330, 326, 333, 345, 338, 354, 356, 300]
         },
-      ]
+      ], type:"bar"
     };
   },
   options: {
@@ -71,6 +64,8 @@ const dashboard24HoursPerformanceChart = {
     }
   }
 };
+
+
 
 const dashboardEmailStatisticsChart = {
   data: canvas => {

@@ -1,6 +1,6 @@
 import React from "react";
 // react plugin used to create charts
-import { Line, Pie } from "react-chartjs-2";
+import { Line, Pie, Bar } from "react-chartjs-2";
 // reactstrap components
 import {Card, CardHeader, CardBody, CardFooter, CardTitle, Row, Col} from "reactstrap";
 // core components
@@ -18,6 +18,9 @@ class Dashboard extends React.Component {
     axios.get('/students').then((res) => this.props.initStudentsReducer(res.data))
     axios.get('/classes').then((res) => this.props.initClassesReducer(res.data))
     axios.get('/professors').then((res) => this.props.initProfessorsReducer(res.data))
+
+    //data
+    axios.get('/inscription').then((res) => {console.log('inscription', res.data);this.props.initInscriptionsReducer(res.data)})
   }
 
   render() {
@@ -139,12 +142,13 @@ class Dashboard extends React.Component {
                   <p className="card-category">Inscriptions</p>
                 </CardHeader>
                 <CardBody>
-                  <Line
+                  <Bar
                     datasetKeyProvider={()=>this.datasetKeyProvider}
-                    data={dashboard24HoursPerformanceChart.data}
+                    data={this.props.inscription[1]}
                     options={dashboard24HoursPerformanceChart.options}
                     width={400}
                     height={100}
+                    type="bar"
                   />
                 </CardBody>
               </Card>
@@ -226,6 +230,12 @@ const mapDispatchToProps = (dispatch) => {
         type: 'INIT_PROFS',
         profs
       })
+    },
+    initInscriptionsReducer: inscription => {
+      dispatch({
+        type: 'INIT_INSCRIPTION',
+        inscription
+      })
     }
   }
 }
@@ -235,7 +245,8 @@ const mapStateToProps = (state) => {
     corses: state.corses,
     students: state.students,
     classes: state.classes,
-    profs: state.profs
+    profs: state.profs,
+    inscription:state.inscription
   }
 }
 
