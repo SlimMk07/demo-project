@@ -13,7 +13,8 @@ class BasicInfoStudent extends Component {
   }
 
   componentDidMount(){
-    axios.get('/corses').then((res) => this.props.initCoursesReducer(res.data))
+    console.log('student props', this.props)
+    axios.get('/corses').then((res) => this.props.initCourseReducer(res.data))
   }
 
   saveInfos = (e) => {
@@ -94,7 +95,7 @@ class BasicInfoStudent extends Component {
             <div className="form-group col-md-10">
               <label >Studying :</label>
               <select multiple className="form-control" name="courses" id="exampleFormControlSelect2" required>
-                {this.props.corse.map((el, i)=><option key={i} value={el._id}>el.name</option>)}
+                {this.props.corse.map((el, i)=><option key={i} value={el._id}>{el.name}</option>)}
               </select>
             </div>
           </div>
@@ -160,10 +161,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    initCourseReducer: corse => {
+    initCourseReducer: corses => {
       dispatch({
         type: 'INIT_CORSES',
-        corse
+        corses
       })
     }
   }

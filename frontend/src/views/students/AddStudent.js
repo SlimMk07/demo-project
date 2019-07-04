@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import './../../assets/css/students.css'
 import BasicInfo from 'views/students/StudentInfo'
 import SocialInfo from 'views/teachers/teacher-social-info'
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux'
+import axios from 'axios'
 import { Card, CardHeader, Row, Col } from "reactstrap";
+
+
 
 class Student extends Component {
   constructor(props) {
@@ -14,6 +19,22 @@ class Student extends Component {
   {
     this.setState({ name, birthdate, courses, email, phone, address, state, zipcode, about, picture })
   }
+
+  addStudent = () => {
+    axios.post('/add_student', {
+      picture: this.state.picture, name: this.state.name, phone: this.state.phone, address: this.state.address, 
+      birthdate: this.state.birthdate, courses: this.state.courses, email: this.state.email, state: this.state.state,
+      zipcode: this.state.zipcode, about: this.state.about,
+    })
+    .then(() => this.props.addStudentReducer({
+      picture: this.state.picture, name: this.state.name, phone: this.state.phone, address: this.state.address, 
+      birthdate: this.state.birthdate, courses: this.state.courses, email: this.state.email, state: this.state.state,
+      zipcode: this.state.zipcode, about: this.state.about,
+    }))
+    .catch((err) => alert(err))
+    this.props.history.push('/admin/students')    
+  }
+
 
   render() {
     return (
@@ -49,13 +70,18 @@ class Student extends Component {
           </Row>
         </div>
       </>
-
-
-
-
-
     );
   }
 }
 
-export default Student;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addStudentReducer: student => {
+      dispatch({
+        type: 'ADD_STUD',
+        student
+      })
+    }
+  }
+}
+export default withRouter(connect(null, mapDispatchToProps)(Student));

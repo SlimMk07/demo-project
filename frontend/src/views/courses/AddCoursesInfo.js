@@ -41,18 +41,19 @@ class BasicInfoCourse extends Component {
 
   addCourse = () => {
     if (!this.state.imagePreviewUrl || !this.state.name || !this.state.duration ||
-      !this.state.description || !this.state.price)
-      console.log('add course')
-    axios.post('/add_corse', {
-      picture: this.state.imagePreviewUrl, name: this.state.name,
-      duration: this.state.duration, description: this.state.description, price: this.state.price
-    })
-    .then(() => this.props.addCourseReducer({
-      picture: this.state.imagePreviewUrl, name: this.state.name,
-      duration: this.state.duration, description: this.state.description, price: this.state.price
-    }))
-    .catch((err) => alert(err))
-    this.props.history.push('/admin/courses')
+      !this.state.description || !this.state.price){
+        axios.post('/add_corse', {
+          picture: this.state.imagePreviewUrl, name: this.state.name,
+          duration: this.state.duration, description: this.state.description, price: this.state.price
+        })
+        .then(() => this.props.addCourseReducer({
+          picture: this.state.imagePreviewUrl, name: this.state.name,
+          duration: this.state.duration, description: this.state.description, price: this.state.price
+        }))
+        .catch((err) => alert(err))
+        this.props.history.push('/admin/courses')
+      }
+    
   }
 
   render() {
