@@ -52,7 +52,7 @@ class Sidebar extends React.Component {
             href="/"
             className="simple-text logo-normal"
           >
-            education
+            general manager
           </a>
         </div>
         <div className="sidebar-wrapper" ref={this.sidebar}>

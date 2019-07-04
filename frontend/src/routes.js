@@ -1,7 +1,7 @@
 import Dashboard from "views/Dashboard.jsx";
 import Calendar from "views/Calendar.jsx";
 import TeacherList from "views/teachers/TeachersList";
-import StudentList from "views/students/students-list";
+import StudentList from "views/students/StudentsList";
 import CourseList from "views/courses/CoursesList";
 
 var routes = [

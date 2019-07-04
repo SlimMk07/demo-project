@@ -16,7 +16,7 @@ class Footer extends React.Component {
               <ul>
                 <li>
                   <a href="/" target="_blank">
-                    education
+                    general manager
                   </a>
                 </li>
                 <li>

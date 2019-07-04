@@ -3,7 +3,7 @@ import { Card, CardHeader, Row, Col } from "reactstrap";
 import OneStudent from './OneStudent';
 import './../../assets/css/students.css'
 import { NavLink, Switch, Route } from "react-router-dom";
-import Student from './Student'
+import StudentProfile from './StudentProfile'
 
 import { connect } from 'react-redux'
 import axios from 'axios'
@@ -15,7 +15,7 @@ class StudentList extends Component {
   }
 
   componentDidMount = () => {
-    axios.get('/corses').then((res) => this.props.initCoursesReducer(res.data))
+    axios.get('/students').then((res) => this.props.initStudentsReducer(res.data))
   }
 
   render() {
@@ -25,7 +25,9 @@ class StudentList extends Component {
           <Row>
             <Col md="12">
               <Card>
-                <button type="submit" className="btn btn-success add-student-btn">Add Student+</button>
+                <NavLink to={"/admin/students/add"} >
+                  <button type="submit" className="btn btn-success add-student-btn">Add Student+</button>
+                </NavLink>
               </Card>
             </Col>
           </Row>
@@ -35,14 +37,14 @@ class StudentList extends Component {
                 <CardHeader>
                   <div className='students-list'>
                     <div className='row students'>
-                      {this.props.corse.map((course, i) =>
+                      {this.props.students.map((student, i) =>
                         <NavLink key={i}
                           to={{
-                            pathname: `/admin/course/profile/${course._id}`,
-                            course: this.props.corse.filter(el => el._id === course._id)[0]
+                            pathname: `/admin/students/profile/${student._id}`,
+                            student: this.props.students.filter(el => el._id === student._id)[0]
                           }}
                         >
-                          <OneStudent key={i} course={course} />
+                          <OneStudent key={i} student={student} />
                         </NavLink>
                       )}
                     </div>
@@ -52,8 +54,8 @@ class StudentList extends Component {
             </Col>
           </Row>
           <Switch>
-            <Route exact path='/admin/course/profile/:id' render={(props) =>
-              <Student course={this.props.corse.filter(el => el._id === props.match.params.id)[0]} _id={props.match.params.id} />} />
+            <Route exact path='/admin/students/profile/:id' render={(props) =>
+              <StudentProfile student={this.props.students.filter(el => el._id === props.match.params.id)[0]} _id={props.match.params.id} />} />
           </Switch>
         </div>
       </>
@@ -63,16 +65,16 @@ class StudentList extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    corse: state.corses
+    students: state.students
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    initCoursesReducer: corses => {
+    initStudentsReducer: students => {
       dispatch({
-        type: 'INIT_CORSES',
-        corses
+        type: 'INIT_STUDS',
+        students
       })
     }
   }

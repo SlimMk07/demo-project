@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FormGroup, Input, Row, Col } from "reactstrap";
 import { withRouter } from 'react-router-dom';
+
 import { connect } from 'react-redux'
 import axios from 'axios'
 
@@ -11,13 +12,20 @@ class BasicInfoStudent extends Component {
     this.state = {}
   }
 
+  componentDidMount(){
+    axios.get('/corses').then((res) => this.props.initCoursesReducer(res.data))
+  }
+
   saveInfos = (e) => {
     if (e.target.name === 'img')
       this.setState({ image: URL.createObjectURL(e.target.files[0]) })
   }
 
   handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value })
+    this.setState({ [e.target.name]: e.target.value }, ()=> this.props.getBasicInfo(
+      this.state.name, this.state.birthdate, this.state.course, this.state.email, this.state.phone, this.state.address,
+      this.state.state, this.state.zipcode, this.state.about, this.state.imagePreviewUrl
+    ))
   }
 
   _handleImgSubmit(e) {
@@ -34,7 +42,10 @@ class BasicInfoStudent extends Component {
     reader.onloadend = () => {
       this.setState({
         file: file, imagePreviewUrl: reader.result
-      });
+      }, ()=>this.props.getBasicInfo(
+        this.state.name, this.state.birthdate, this.state.course, this.state.email, this.state.phone, this.state.address,
+        this.state.state, this.state.zipcode, this.state.about, this.state.imagePreviewUrl
+      ));
     };
     reader.readAsDataURL(file);
   }
@@ -47,29 +58,31 @@ class BasicInfoStudent extends Component {
       picture: this.state.imagePreviewUrl, name: this.state.name,
       duration: this.state.duration, description: this.state.description, price: this.state.price
     })
-      .then(() => this.props.addCourseReducer({
+      .then(() => this.props.initCourseReducer({
         picture: this.state.imagePreviewUrl, name: this.state.name,
         duration: this.state.duration, description: this.state.description, price: this.state.price
       }))
       .catch((err) => alert(err))
-    this.props.history.push('/admin/courses')
+    this.props.history.push('/admin/students')
   }
 
   render() {
     let { imagePreviewUrl } = this.state;
     let $imagePreview = (imagePreviewUrl) ? <img src={imagePreviewUrl} alt="prev" /> : <div className="previewText">"Add Photo"</div>
+
+    console.log('img', imagePreviewUrl )
     
     return (
       <div>
         <form >
           <div className="form-row">
             <div className="form-group col-md-4">
-              <input type="text" className="form-control" id="inputName" placeholder="Full Name" required />
+              <input type="text" className="form-control" name="name" placeholder="Full Name" required />
             </div>
             <div className="form-group col-md-3">
-              <input type="date" className="form-control" id="inputdate" placeholder="Date of birth" required />
+              <input type="date" className="form-control" name="birthdate" placeholder="Date of birth" required />
             </div>
-            <div className="form-group col-md-3">
+            <div className="form-group col-md-3" name="gender">
               <select id="inputState" className="form-control" required >
                 <option>Select Gender</option>
                 <option value='0'>Male</option>
@@ -80,40 +93,34 @@ class BasicInfoStudent extends Component {
           <div className="form-row">
             <div className="form-group col-md-10">
               <label >Studying :</label>
-              <select multiple className="form-control" id="exampleFormControlSelect2" required>
-                <option>Math</option>
-                <option>science</option>
-                <option>Sport</option>
-                <option>physics</option>
-                <option>Music</option>
-                <option>Painting</option>
-                <option>English</option>
+              <select multiple className="form-control" name="courses" id="exampleFormControlSelect2" required>
+                {this.props.corse.map((el, i)=><option key={i} value={el._id}>el.name</option>)}
               </select>
             </div>
           </div>
           <div className="form-row">
             <div className="form-group col-md-6">
-              <input type="email" className="form-control" id="inputEmail" placeholder="Email" required />
+              <input type="email" className="form-control" name="email" placeholder="Email" required />
             </div>
             <div className="form-group col-md-4">
-              <input type="tel" className="form-control" id="inputTel" placeholder="Mobile.No" required />
+              <input type="tel" className="form-control" name="phone" placeholder="Mobile.No" required />
             </div>
           </div>
           <div className="form-row">
             <div className="form-group col-md-10">
-              <input type="text" className="form-control" id="inputAdress" placeholder="Adress" required />
+              <input type="text" className="form-control" name="address" placeholder="Adress" required />
             </div>
           </div>
           <div className="form-row">
             <div className="form-group col-md-6">
-              <select id="inputState" className="form-control" defaultValue="Tunis" >
+              <select id="inputState" className="form-control" name="state" defaultValue="Tunis" >
                 <option>Tunis</option>
                 <option>Sousse</option>
                 <option>Sfax</option>
               </select>
             </div>
             <div className="form-group col-md-4">
-              <input type="text" className="form-control" id="inputZip" placeholder="Zip Code" required />
+              <input type="text" className="form-control" name="zipcode" placeholder="Zip Code" required />
             </div>
           </div>
           <Row>
@@ -121,7 +128,7 @@ class BasicInfoStudent extends Component {
               <FormGroup>
                 <label>About</label>
                 <Input
-                  type="textarea"
+                  type="textarea" name="about"
                   defaultValue="Oh so, your weak rhyme You doubt I'll bother, reading into it"
                 />
               </FormGroup>
@@ -145,16 +152,22 @@ class BasicInfoStudent extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    corse: state.corses
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    addCourseReducer: corse => {
+    initCourseReducer: corse => {
       dispatch({
-        type: 'ADD_CORSE',
+        type: 'INIT_CORSES',
         corse
       })
     }
   }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(BasicInfoStudent));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BasicInfoStudent));
 
