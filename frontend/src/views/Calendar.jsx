@@ -24,8 +24,8 @@ class CalendarFull extends React.Component {
       add: false,
       /** to add a class */
       class: '',
-      course: "Science",
-      professor: 'Titi',
+      course: {},
+      professor: {},
       start: moment(new Date()).format('YYYY-MM-DDTHH:mm'),
       end: moment(new Date()).format('YYYY-MM-DDTHH:mm'),
       color: '#055049',
@@ -36,8 +36,16 @@ class CalendarFull extends React.Component {
 
   componentDidMount = () => {
     axios.get('/classes').then((res) => this.props.initClassesReducer(res.data))
+    axios.get('/corses').then((res) => this.props.initCoursesReducer(res.data))
+    axios.get('/professors').then((res) => this.props.initProfessorsReducer(res.data))
   }
   addClass = (e) => {
+    console.log("props calendar", this.props, {
+      class: this.state.class, course: this.state.course,
+      professor: this.state.professor, start: this.state.start, color: this.state.color,
+      textColor: this.state.textColor, repeat: this.state.repeat, end: this.state.end
+    })
+
     this.toggle(e)
     const newEvents = createClass({
       class: this.state.class, course: this.state.course,
@@ -48,8 +56,8 @@ class CalendarFull extends React.Component {
       .then(() => {
         this.props.addClassReducer(newEvents)
       })
-      .then(()=>{axios.get('/classes').then((res) => this.props.initClassesReducer(res.data))})
-      .then(()=>this.setState(this.state))
+      .then(() => { axios.get('/classes').then((res) => this.props.initClassesReducer(res.data)) })
+      .then(() => this.setState(this.state))
       .catch((err) => console.log('add_classes', err))
   }
 
@@ -57,16 +65,20 @@ class CalendarFull extends React.Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  handleSelect = (e) => {
+    if (e.target.name === 'course')
+    this.setState({course: this.props.corses.filter(el=> el._id === e.target.value)[0] })
+    else if (e.target.name === 'professor')
+    this.setState({professor: this.props.profs.filter(el=> el._id === e.target.value)[0] })
+  }
+
   toggle = (event) => {
     const name = event.target.name
     const state = !(this.state[name] === true)
-    this.setState(prevState => {
-      return ({ [name]: state })
-    });
+    this.setState(() =>  ({ [name]: state }));
   }
 
   render() {
-    // this.setState({shouldUpdate: false})
     return (
       <>
         <div className="content">
@@ -92,7 +104,6 @@ class CalendarFull extends React.Component {
                     })
                     }
                     eventPositioned={({ event, isStart, isEnd, isMirror }) => {
-                      console.log(isStart, isEnd, isMirror, event.id, event)
                       if (isStart && isEnd && isMirror) {
                         axios.put(`/update_classes/${event.id}`, { id: parseFloat(event.id), start: event.start, end: event.end })
                           .then(() => this.props.editClassReducer({ id: parseFloat(event.id), start: event.start, end: event.end }))
@@ -124,29 +135,22 @@ class CalendarFull extends React.Component {
                     <FormGroup>
                       <Label>Course</Label>
                       <Input type="select" name="course" required
-                        onChange={this.handleForm} value={this.state.course}>
-                        <option value="Maths">Maths</option>
-                        <option value="Physics">Physics</option>
-                        <option value="Science">Science</option>
-                        <option value="Dance">Dance</option>
-                        <option value="Sport">Sport</option>
+                        onChange={this.handleSelect}>
+                        {this.props.corses.map((el, i) => <option key={i} value={el._id}>{el.name}</option>)}
                       </Input>
                     </FormGroup>
                     <FormGroup>
                       <Label>Professor</Label>
                       <Input type="select" name="professor" required
-                        onChange={this.handleForm} value={this.state.professor}>
-                        <option value="Jane Doe">Jane Doe</option>
-                        <option value="Titi">Titi</option>
-                        <option value="Jasser">Jasser</option>
-                        <option value="Asma">Asma</option>
-                        <option value="Nessrine">Nessrine</option>
+                        onChange={this.handleSelect}>
+                        {this.props.profs.map((el, i) => <option key={i} value={el._id}>{el.name}</option>)}
                       </Input>
                     </FormGroup>
                     <FormGroup>
                       <Label>Start Date</Label>
                       <Input type="datetime-local" name="start"
-                        value={this.state.start} onChange={this.handleForm} required>
+                        value={this.state.start} 
+                        onChange={this.handleForm} required>
                       </Input>
                     </FormGroup>
                     <FormGroup>
@@ -207,13 +211,27 @@ const mapDispatchToProps = (dispatch) => {
         type: 'INIT_CLASSES',
         classes
       })
+    },
+    initCoursesReducer: corses => {
+      dispatch({
+        type: 'INIT_CORSES',
+        corses
+      })
+    },
+    initProfessorsReducer: profs => {
+      dispatch({
+        type: 'INIT_PROFS',
+        profs
+      })
     }
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    classes: state.classes
+    classes: state.classes,
+    corses: state.corses,
+    profs: state.professors
   }
 }
 

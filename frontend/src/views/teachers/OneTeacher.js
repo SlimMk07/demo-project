@@ -11,9 +11,9 @@ class OneTeacher extends Component {
     return (
       <div className="card-deck one-teacher">
         <div className="card">
-          <img src={this.props.prof.picture} className="card-img-top" alt="pic" />
+          <img src={this.props.teacher.image} className="card-img-top" alt="pic" />
           <div className="card-body">
-            <h5 className="card-title teachers-name">{this.props.course.name}</h5>
+            <h5 className="card-title teachers-name">{this.props.teacher.name}</h5>
           </div>
         </div>
       </div>);

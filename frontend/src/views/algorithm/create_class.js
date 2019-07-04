@@ -1,13 +1,14 @@
 import moment from 'moment';
 
-const addOneClass=(objectC, duration)=>{
+const addOneClass=(objectC)=>{
+  console.log("objectC", objectC)
   return {
     groupId: Math.random() * 1000000,
     start: moment(new Date(objectC.start)).format('YYYY-MM-DDTHH:mm'),
     end: moment((new Date(objectC.start))
-      .setMinutes(new Date(objectC.start).getMinutes() + duration))
+      .setMinutes(new Date(objectC.start).getMinutes() + objectC.course.duration))
       .format('YYYY-MM-DDTHH:mm'),
-    title: objectC.professor + ' - ' + objectC.course + ' - ' + objectC.class,
+    title: objectC.professor.name + ' - ' + objectC.course.name + ' - ' + objectC.class,
     class: objectC.class,
     color: objectC.color,
     textColor: objectC.textColor,
@@ -17,7 +18,7 @@ const addOneClass=(objectC, duration)=>{
 }
 
 const f = (objectC) => {
-  const duration = 90
+  const duration = objectC.course.duration
 
   switch (objectC.repeat) {
     case '1': return [addOneClass(objectC, duration)]
@@ -34,7 +35,7 @@ const f = (objectC) => {
           groupId,
           start: x,
           end: y,
-          title: objectC.professor + ' - ' + objectC.course + ' - ' + objectC.class,
+          title: objectC.professor.name + ' - ' + objectC.course.name + ' - ' + objectC.class,
           class: objectC.class,
           color: objectC.color,
           textColor: objectC.textColor,

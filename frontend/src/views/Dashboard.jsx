@@ -1,6 +1,6 @@
 import React from "react";
 // react plugin used to create charts
-import { Line, Pie } from "react-chartjs-2";
+import { Line, Pie, Bar } from "react-chartjs-2";
 // reactstrap components
 import {Card, CardHeader, CardBody, CardFooter, CardTitle, Row, Col} from "reactstrap";
 // core components
@@ -17,11 +17,29 @@ class Dashboard extends React.Component {
     axios.get('/corses').then((res) => this.props.initCoursesReducer(res.data))
     axios.get('/students').then((res) => this.props.initStudentsReducer(res.data))
     axios.get('/classes').then((res) => this.props.initClassesReducer(res.data))
-    axios.get('/professors').then((res) =>{console.log('prof data', res.data); this.props.initProfessorsReducer(res.data)})
+    axios.get('/professors').then((res) => this.props.initProfessorsReducer(res.data))
+
+    //data
+    axios.get('/inscription').then((res) => this.props.initInscriptionsReducer(res.data))
   }
 
   render() {
-   console.log ('props', this.props)
+    let graph = dashboard24HoursPerformanceChart
+    graph.data = canvas => {
+      return {
+        labels: this.props.inscription[0],
+        datasets: [
+          {
+            borderColor: "#4acccd",
+            backgroundColor: "aqua",
+            pointRadius: 0,
+            pointHoverRadius: 0,
+            borderWidth: 3,
+            data: this.props.inscription[1]
+          },
+        ], type:"bar"
+      };
+    }
     return (
       <>
         <div className="content"> 
@@ -64,7 +82,7 @@ class Dashboard extends React.Component {
                     <Col md="8" xs="7">
                       <div className="numbers">
                         <p className="card-category">Teachers Number</p>
-                        {/* <CardTitle tag="p">{this.props.profs.length}</CardTitle> */}
+                        <CardTitle tag="p">{this.props.profs.length}</CardTitle>
                         <p />
                       </div>
                     </Col>
@@ -132,26 +150,25 @@ class Dashboard extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col md="12">
+            <Col md="6">
               <Card>
                 <CardHeader>
                   <CardTitle tag="h5">Inscriptions every session</CardTitle>
                   <p className="card-category">Inscriptions</p>
                 </CardHeader>
                 <CardBody>
-                  <Line
+                  <Bar
                     datasetKeyProvider={()=>this.datasetKeyProvider}
-                    data={dashboard24HoursPerformanceChart.data}
+                    data={ graph.data}
                     options={dashboard24HoursPerformanceChart.options}
                     width={400}
-                    height={100}
+                    height={202}
+                    type="bar"
                   />
                 </CardBody>
               </Card>
             </Col>
-          </Row>
-          <Row>
-            <Col md="4">
+            <Col md="6">
               <Card>
                 <CardHeader>
                   <CardTitle tag="h5">courses inscriptions Statistics</CardTitle>
@@ -172,6 +189,8 @@ class Dashboard extends React.Component {
                 </CardFooter>
               </Card>
             </Col>
+          </Row>
+          <Row>
             <Col md="8">
               <Card className="card-chart">
                 <CardHeader>
@@ -226,6 +245,12 @@ const mapDispatchToProps = (dispatch) => {
         type: 'INIT_PROFS',
         profs
       })
+    },
+    initInscriptionsReducer: inscription => {
+      dispatch({
+        type: 'INIT_INSCRIPTION',
+        inscription
+      })
     }
   }
 }
@@ -235,7 +260,8 @@ const mapStateToProps = (state) => {
     corses: state.corses,
     students: state.students,
     classes: state.classes,
-    profs: state.profs
+    profs: state.professors,
+    inscription:state.inscription
   }
 }
 
