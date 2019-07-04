@@ -6,7 +6,7 @@ const dashboard24HoursPerformanceChart = {
       datasets: [
         {
           borderColor: "#4acccd",
-          backgroundColor: "aqua",
+          backgroundColor:  "#4acccd",
           pointRadius: 0,
           pointHoverRadius: 0,
           borderWidth: 3,
@@ -36,7 +36,7 @@ const dashboard24HoursPerformanceChart = {
           gridLines: {
             drawBorder: false,
             zeroLineColor: "#ccc",
-            color: "rgba(255,255,255,0.05)"
+            color: "#ccc" 
           }
         }
       ],
@@ -46,7 +46,7 @@ const dashboard24HoursPerformanceChart = {
           barPercentage: 0.5,
           gridLines: {
             drawBorder: false,
-            color: "rgba(255,255,255,0.1)",
+            color: 'red',//"rgba(255,255,255,0.1)",
             zeroLineColor: "transparent",
             display: false
           },

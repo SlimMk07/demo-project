@@ -4,8 +4,8 @@ const bodyParser = require('body-parser')
 const { MongoClient, ObjectID } = require('mongodb')
 
 const app = express();
-app.use(bodyParser.json({limit: '50mb'})) 
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}))
+app.use(bodyParser.json({ limit: '50mb' }))
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 
 const mongourl = 'mongodb://localhost:27017'
 const database = 'education'
@@ -109,37 +109,29 @@ MongoClient.connect(mongourl, { useNewUrlParser: true }, (err, client) => {
   })
 
   app.get('/inscription', (req, res) => {
-    const date ="2019-07-02"
-    db.collection('classes').countDocuments({start:{$regex : "2019-07-28"}}, {}, (err, data3) => {
+    const date = "2019-07-02"
+    db.collection('classes').countDocuments({ start: { $regex: "2019-07-28" } }, {}, (err, data3) => {
       if (err) res.send("error")
-      else  {
-        db.collection('classes').countDocuments({start:{$regex : "2019-06-29"}}, {}, (err, data4) => {
+      else db.collection('classes').countDocuments({ start: { $regex: "2019-06-29" } }, {}, (err, data4) => {
+        if (err) res.send("error")
+        else db.collection('classes').countDocuments({ start: { $regex: "2019-06-30" } }, {}, (err, data5) => {
           if (err) res.send("error")
-          else  {
-            db.collection('classes').countDocuments({start:{$regex : "2019-06-30"}}, {}, (err, data5) => {
+          else db.collection('classes').countDocuments({ start: { $regex: "2019-07-01" } }, {}, (err, data6) => {
+            if (err) res.send("error")
+            else db.collection('classes').countDocuments({ start: { $regex: "2019-07-02" } }, {}, (err, data7) => {
               if (err) res.send("error")
-              else {
-                db.collection('classes').countDocuments({start:{$regex : "2019-07-01"}}, {}, (err, data6) => {
+              else db.collection('classes').countDocuments({ start: { $regex: "2019-07-27" } }, {}, (err, data1) => {
+                if (err) res.send("error")
+                else db.collection('classes').countDocuments({ start: { $regex: "2019-07-26" } }, {}, (err, data2) => {
                   if (err) res.send("error")
-                  else  {
-                    db.collection('classes').countDocuments({start:{$regex : "2019-07-02"}}, {}, (err, data7) => {
-                      if (err) res.send("error")
-                      else db.collection('classes').countDocuments({start:{$regex : "2019-07-27"}}, {}, (err, data1) => {
-                        if (err) res.send("error")
-                        else db.collection('classes').countDocuments({start:{$regex : "2019-07-26"}}, {}, (err, data2) => {
-                          if (err) res.send("error")
-                          else  res.send([["2019-06-26", "2019-06-27", "2019-06-28", "2019-06-29", "2019-06-30",  "2019-07-01",  "2019-07-02"],
-                            [data1, data2, data3, data4, data5, data6, data7] ])
-                        });
-                      });
-                    });
-                  }
+                  else res.send([["2019-06-26", "2019-06-27", "2019-06-28", "2019-06-29", "2019-06-30", "2019-07-01", "2019-07-02"],
+                    [data1, data2, data3, data4, data5, data6, data7]])
                 });
-              }
+              });
             });
-          }
+          });
         });
-      }
+      });
     });
   })
 
@@ -180,14 +172,14 @@ MongoClient.connect(mongourl, { useNewUrlParser: true }, (err, client) => {
   app.put('/update_classes/:id', (req, res) => {
     console.log('body', req.body)
     let modifiedContact = req.body
-    db.collection('classes').findOneAndUpdate({ id: modifiedContact.id }, 
+    db.collection('classes').findOneAndUpdate({ id: modifiedContact.id },
       { $set: { start: modifiedContact.start, end: modifiedContact.end } }, (err, data) => {
-      if (err) res.send("error")
-      else {
-        console.log('data', data)
-        res.send(data)
-      }
-    })
+        if (err) res.send("error")
+        else {
+          console.log('data', data)
+          res.send(data)
+        }
+      })
   })
 
 })
