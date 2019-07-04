@@ -51,20 +51,19 @@ class BasicInfoStudent extends Component {
     reader.readAsDataURL(file);
   }
 
-  addCourse = () => {
-    if (!this.state.imagePreviewUrl || !this.state.name || !this.state.duration ||
-      !this.state.description || !this.state.price)
-      console.log('add course')
-    axios.post('/add_corse', {
-      picture: this.state.imagePreviewUrl, name: this.state.name,
-      duration: this.state.duration, description: this.state.description, price: this.state.price
+  addStudent = () => {
+    axios.post('/add_student', {
+      picture: this.state.picture, name: this.state.name, phone: this.state.phone, address: this.state.address, 
+      birthdate: this.state.birthdate, courses: this.state.courses, email: this.state.email, state: this.state.state,
+      zipcode: this.state.zipcode, about: this.state.about,
     })
-      .then(() => this.props.initCourseReducer({
-        picture: this.state.imagePreviewUrl, name: this.state.name,
-        duration: this.state.duration, description: this.state.description, price: this.state.price
-      }))
-      .catch((err) => alert(err))
-    this.props.history.push('/admin/students')
+    .then(() => this.props.addStudentReducer({
+      picture: this.state.picture, name: this.state.name, phone: this.state.phone, address: this.state.address, 
+      birthdate: this.state.birthdate, courses: this.state.courses, email: this.state.email, state: this.state.state,
+      zipcode: this.state.zipcode, about: this.state.about,
+    }))
+    .catch((err) => alert(err))
+    this.props.history.push('/admin/students')    
   }
 
   render() {
@@ -165,6 +164,12 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({
         type: 'INIT_CORSES',
         corses
+      })
+    },
+    addStudentReducer: student => {
+      dispatch({
+        type: 'ADD_STUD',
+        student
       })
     }
   }
