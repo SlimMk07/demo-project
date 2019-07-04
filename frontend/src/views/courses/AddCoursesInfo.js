@@ -55,7 +55,6 @@ class BasicInfoCourse extends Component {
         .catch((err) => alert(err))
         // this.props.history.push('/admin/courses')
       }
-    
   }
 
   render() {

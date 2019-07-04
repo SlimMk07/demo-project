@@ -1,10 +1,10 @@
 import React from "react";
 // react plugin used to create charts
-import { Line, Pie, Bar } from "react-chartjs-2";
+import { Pie, Bar } from "react-chartjs-2";
 // reactstrap components
 import {Card, CardHeader, CardBody, CardFooter, CardTitle, Row, Col} from "reactstrap";
 // core components
-import {dashboard24HoursPerformanceChart, dashboardEmailStatisticsChart, dashboardNASDAQChart} from "variables/charts.jsx";
+import {dashboard24HoursPerformanceChart, dashboardEmailStatisticsChart} from "variables/charts.jsx";
 import { connect } from 'react-redux'
 import axios from 'axios'
 
@@ -21,6 +21,7 @@ class Dashboard extends React.Component {
 
     //data
     axios.get('/inscription').then((res) => this.props.initInscriptionsReducer(res.data))
+    axios.get('/enrolled').then((res) => this.props.initEnrolledReducer(res.data))
   }
 
   render() {
@@ -38,6 +39,22 @@ class Dashboard extends React.Component {
             data: this.props.inscription[1]
           },
         ], type:"bar"
+      };
+    }
+    let pie = dashboardEmailStatisticsChart
+    pie.data=  canvas => {
+      return {
+        labels: this.props.enrolled[0],
+        datasets: [
+          {
+            label: "Emails",
+            pointRadius: 0,
+            pointHoverRadius: 0,
+            backgroundColor: ["#e3e3e3", "#4acccd", "#fcc468", "#ef8157"],
+            borderWidth: 0,
+            data: this.props.enrolled[1]
+          }
+        ]
       };
     }
     return (
@@ -174,7 +191,7 @@ class Dashboard extends React.Component {
                 </CardHeader>
                 <CardBody>
                   <Pie
-                    data={dashboardEmailStatisticsChart.data}
+                    data={pie.data}
                     options={dashboardEmailStatisticsChart.options}
                     width={400}
                     height={200}
@@ -182,34 +199,10 @@ class Dashboard extends React.Component {
                 </CardBody>
                 <CardFooter>
                   <div className="legend">
-                    <i className="fa fa-circle text-primary" /> Opened{" "}
-                    <i className="fa fa-circle text-warning" /> Read{" "}
-                    <i className="fa fa-circle text-danger" /> Deleted{" "}
-                    <i className="fa fa-circle text-gray" /> Unopened
-                  </div>
-                </CardFooter>
-              </Card>
-            </Col>
-          </Row>
-          <Row>
-            <Col md="12">
-              <Card className="card-chart">
-                <CardHeader>
-                  <CardTitle tag="h5">NASDAQ: AAPL</CardTitle>
-                  <p className="card-category">Line Chart with Points</p>
-                </CardHeader>
-                <CardBody>
-                  <Line
-                    datasetKeyProvider={()=>this.datasetKeyProvider}
-                    data={dashboardNASDAQChart.data}
-                    options={dashboardNASDAQChart.options}
-                    width={400}
-                    height={100}
-                  />
-                </CardBody>
-                <CardFooter>
-                  <div className="chart-legend">
-                    <i className="fa fa-circle text-warning" /> BMW 5 Series
+                    <i className="fa fa-circle text-primary" /> Enrolled{" "}
+                    <i className="fa fa-circle text-warning" /> Not Enrolled{" "}
+                    {/* <i className="fa fa-circle text-danger" /> Not Enrolled{" "} */}
+                    {/* <i className="fa fa-circle text-gray" /> Unopened */}
                   </div>
                 </CardFooter>
               </Card>
@@ -252,6 +245,12 @@ const mapDispatchToProps = (dispatch) => {
         type: 'INIT_INSCRIPTION',
         inscription
       })
+    },
+    initEnrolledReducer: enrolled => {
+      dispatch({
+        type: 'INIT_ENROLED',
+        enrolled
+      })
     }
   }
 }
@@ -262,7 +261,9 @@ const mapStateToProps = (state) => {
     students: state.students,
     classes: state.classes,
     profs: state.professors,
-    inscription:state.inscription
+    inscription:state.inscription,
+    enrolled:state.enrolled,
+
   }
 }
 

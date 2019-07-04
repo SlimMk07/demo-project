@@ -110,22 +110,22 @@ MongoClient.connect(mongourl, { useNewUrlParser: true }, (err, client) => {
 
   app.get('/inscription', (req, res) => {
     const date = "2019-07-02"
-    db.collection('classes').countDocuments({ start: { $regex: "2019-07-28" } }, {}, (err, data3) => {
+    db.collection('classes').countDocuments({ start: { $regex: "2019-06-29" } }, {}, (err, data3) => {
       if (err) res.send("error")
-      else db.collection('classes').countDocuments({ start: { $regex: "2019-06-29" } }, {}, (err, data4) => {
+      else db.collection('classes').countDocuments({ start: { $regex: "2019-06-30" } }, {}, (err, data4) => {
         if (err) res.send("error")
-        else db.collection('classes').countDocuments({ start: { $regex: "2019-06-30" } }, {}, (err, data5) => {
+        else db.collection('classes').countDocuments({ start: { $regex: "2019-07-01" } }, {}, (err, data5) => {
           if (err) res.send("error")
-          else db.collection('classes').countDocuments({ start: { $regex: "2019-07-01" } }, {}, (err, data6) => {
+          else db.collection('classes').countDocuments({ start: { $regex: "2019-07-02" } }, {}, (err, data6) => {
             if (err) res.send("error")
-            else db.collection('classes').countDocuments({ start: { $regex: "2019-07-02" } }, {}, (err, data7) => {
+            else db.collection('classes').countDocuments({ start: { $regex: "2019-07-03" } }, {}, (err, data7) => {
               if (err) res.send("error")
-              else db.collection('classes').countDocuments({ start: { $regex: "2019-07-27" } }, {}, (err, data1) => {
+              else db.collection('classes').countDocuments({ start: { $regex: "2019-07-04" } }, {}, (err, data1) => {
                 if (err) res.send("error")
-                else db.collection('classes').countDocuments({ start: { $regex: "2019-07-26" } }, {}, (err, data2) => {
+                else db.collection('classes').countDocuments({ start: { $regex: "2019-07-05" } }, {}, (err, data2) => {
                   if (err) res.send("error")
-                  else res.send([["2019-06-26", "2019-06-27", "2019-06-28", "2019-06-29", "2019-06-30", "2019-07-01", "2019-07-02"],
-                    [data1, data2, data3, data4, data5, data6, data7]])
+                  else res.send([["2019-06-29", "2019-06-30", "2019-07-01", "2019-07-02", "2019-07-03", "2019-07-04", "2019-07-05"],
+                  [data1, data2, data3, data4, data5, data6, data7]])
                 });
               });
             });
@@ -133,6 +133,24 @@ MongoClient.connect(mongourl, { useNewUrlParser: true }, (err, client) => {
         });
       });
     });
+  })
+
+  app.get('/enrolled', (req, res) => {
+    db.collection('classes').find({}).project({ _id: 0, title: 1 }).toArray((err, dataClasses) => {
+      if (err) res.send("error")
+      let classesTitles = []
+      for (let el of dataClasses) {
+        classesTitles.push(el.title.split("-")[1].trim())
+      }
+      console.log(classesTitles)
+      db.collection('corses').countDocuments({ name: { $in: classesTitles } }, function (error, enrolled) {
+        if (err) throw error;
+        db.collection('corses').countDocuments({ name: { $nin: classesTitles } }, function (error, notEnrolled) {
+          if (err) throw error;
+          res.send([ ['enrolled', 'notEnrolled'], [enrolled, notEnrolled]] );
+        });
+      });
+    })
   })
 
   app.put('/update_corse/:id', bodyParser.json(), (req, res) => {
