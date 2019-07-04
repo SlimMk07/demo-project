@@ -17,7 +17,7 @@ class Dashboard extends React.Component {
     axios.get('/corses').then((res) => this.props.initCoursesReducer(res.data))
     axios.get('/students').then((res) => this.props.initStudentsReducer(res.data))
     axios.get('/classes').then((res) => this.props.initClassesReducer(res.data))
-    axios.get('/professors').then((res) => this.props.initProfessorsReducer(res.data))
+    axios.get('/professors').then((res) =>{console.log('prof data', res.data); this.props.initProfessorsReducer(res.data)})
   }
 
   render() {
@@ -64,7 +64,7 @@ class Dashboard extends React.Component {
                     <Col md="8" xs="7">
                       <div className="numbers">
                         <p className="card-category">Teachers Number</p>
-                        {/* <CardTitle tag="p">{this.props}</CardTitle> */}
+                        {/* <CardTitle tag="p">{this.props.profs.length}</CardTitle> */}
                         <p />
                       </div>
                     </Col>
