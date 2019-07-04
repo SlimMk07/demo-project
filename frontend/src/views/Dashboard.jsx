@@ -20,11 +20,26 @@ class Dashboard extends React.Component {
     axios.get('/professors').then((res) => this.props.initProfessorsReducer(res.data))
 
     //data
-    axios.get('/inscription').then((res) => {console.log('inscription', res.data);this.props.initInscriptionsReducer(res.data)})
+    axios.get('/inscription').then((res) => this.props.initInscriptionsReducer(res.data))
   }
 
   render() {
-   console.log ('props', this.props)
+    let graph = dashboard24HoursPerformanceChart
+    graph.data = canvas => {
+      return {
+        labels: this.props.inscription[0],
+        datasets: [
+          {
+            borderColor: "#4acccd",
+            backgroundColor: "aqua",
+            pointRadius: 0,
+            pointHoverRadius: 0,
+            borderWidth: 3,
+            data: this.props.inscription[1]
+          },
+        ], type:"bar"
+      };
+    }
     return (
       <>
         <div className="content"> 
@@ -67,7 +82,7 @@ class Dashboard extends React.Component {
                     <Col md="8" xs="7">
                       <div className="numbers">
                         <p className="card-category">Teachers Number</p>
-                        {/* <CardTitle tag="p">{this.props}</CardTitle> */}
+                        <CardTitle tag="p">{this.props.profs.length}</CardTitle>
                         <p />
                       </div>
                     </Col>
@@ -135,7 +150,7 @@ class Dashboard extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col md="12">
+            <Col md="6">
               <Card>
                 <CardHeader>
                   <CardTitle tag="h5">Inscriptions every session</CardTitle>
@@ -144,18 +159,16 @@ class Dashboard extends React.Component {
                 <CardBody>
                   <Bar
                     datasetKeyProvider={()=>this.datasetKeyProvider}
-                    data={this.props.inscription[1]}
+                    data={ graph.data}
                     options={dashboard24HoursPerformanceChart.options}
                     width={400}
-                    height={100}
+                    height={202}
                     type="bar"
                   />
                 </CardBody>
               </Card>
             </Col>
-          </Row>
-          <Row>
-            <Col md="4">
+            <Col md="6">
               <Card>
                 <CardHeader>
                   <CardTitle tag="h5">courses inscriptions Statistics</CardTitle>
@@ -176,6 +189,8 @@ class Dashboard extends React.Component {
                 </CardFooter>
               </Card>
             </Col>
+          </Row>
+          <Row>
             <Col md="8">
               <Card className="card-chart">
                 <CardHeader>
@@ -245,7 +260,7 @@ const mapStateToProps = (state) => {
     corses: state.corses,
     students: state.students,
     classes: state.classes,
-    profs: state.profs,
+    profs: state.professors,
     inscription:state.inscription
   }
 }

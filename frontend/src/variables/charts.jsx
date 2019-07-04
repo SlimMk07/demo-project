@@ -2,22 +2,18 @@ const dashboard24HoursPerformanceChart = {
   data: canvas => {
     return {
       labels: [
-        "2019-07-02",
-        "2019-07-01",
-        "2019-06-30",
-        "2019-06-29",
-        "2019-06-28"
       ],
       datasets: [
         {
-          borderColor: "red",
-          backgroundColor: "#5FFBF1",
+          borderColor: "#4acccd",
+          backgroundColor: "aqua",
           pointRadius: 0,
           pointHoverRadius: 0,
           borderWidth: 3,
-          data: [300, 310, 316, 322, 330, 326, 333, 345, 338, 354, 356, 300]
+          data: []
         },
-      ], type:"bar"
+      ], 
+      type:"bar"
     };
   },
   options: {
@@ -28,15 +24,14 @@ const dashboard24HoursPerformanceChart = {
     tooltips: {
       enabled: false
     },
-
     scales: {
       yAxes: [
         {
           ticks: {
             fontColor: "#9f9f9f",
             beginAtZero: false,
-            maxTicksLimit: 5
-            //padding: 20
+            maxTicksLimit: 1000,
+            padding: 20
           },
           gridLines: {
             drawBorder: false,
@@ -48,7 +43,7 @@ const dashboard24HoursPerformanceChart = {
 
       xAxes: [
         {
-          barPercentage: 1.6,
+          barPercentage: 0.5,
           gridLines: {
             drawBorder: false,
             color: "rgba(255,255,255,0.1)",
