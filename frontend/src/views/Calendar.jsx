@@ -111,6 +111,7 @@ class CalendarFull extends React.Component {
                       }
                     }}
                     eventResize={({ event }) => {
+                      console.log("event resize", { id: parseFloat(event.id), start: event.start, end: event.end })
                       axios.put(`/update_classes/${event.id}`, { id: parseFloat(event.id), start: event.start, end: event.end })
                         .then(() => this.props.editClassReducer({ id: parseFloat(event.id), start: event.start, end: event.end }))
                         .catch((err) => console.log('r update_classes', err))

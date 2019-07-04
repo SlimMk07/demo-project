@@ -163,7 +163,6 @@ class Dashboard extends React.Component {
                     options={dashboard24HoursPerformanceChart.options}
                     width={400}
                     height={202}
-                    type="bar"
                   />
                 </CardBody>
               </Card>
@@ -177,6 +176,8 @@ class Dashboard extends React.Component {
                   <Pie
                     data={dashboardEmailStatisticsChart.data}
                     options={dashboardEmailStatisticsChart.options}
+                    width={400}
+                    height={200}
                   />
                 </CardBody>
                 <CardFooter>
@@ -191,7 +192,7 @@ class Dashboard extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col md="8">
+            <Col md="12">
               <Card className="card-chart">
                 <CardHeader>
                   <CardTitle tag="h5">NASDAQ: AAPL</CardTitle>

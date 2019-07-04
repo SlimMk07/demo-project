@@ -41,9 +41,9 @@ class BasicInfoCourse extends Component {
 
   addCourse = () => {
     console.log('add course')
-    // if (!this.state.imagePreviewUrl || !this.state.name || !this.state.duration ||
-    //   !this.state.description || !this.state.price)
-      // {
+     if (this.state.imagePreviewUrl && this.state.name && this.state.duration && this.state.description && this.state.price)
+      {
+        console.log("addCourse", (Boolean)(this.state.name) )
         axios.post('/add_corse', {
           picture: this.state.imagePreviewUrl, name: this.state.name,
           duration: this.state.duration, description: this.state.description, price: this.state.price
@@ -54,7 +54,7 @@ class BasicInfoCourse extends Component {
         }))
         .catch((err) => alert(err))
         // this.props.history.push('/admin/courses')
-      // }
+      }
     
   }
 
